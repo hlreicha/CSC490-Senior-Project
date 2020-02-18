@@ -5,4 +5,4 @@ The software allows for managers to check inventory, sales prices, adjust employ
 
 Server: EC2 Instance through AWS Cloud
 Database: MariaSQL through LAMPS. 
-$
+
