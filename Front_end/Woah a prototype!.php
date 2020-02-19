@@ -2,7 +2,7 @@
 
 <html>
 <?php
-$servername = "3.15.184.45:3306";
+$servername = "3.134.108.106:3306";
 $username = "mysql";
 $password = "Moscow34";
 $dbname = "Joe";
