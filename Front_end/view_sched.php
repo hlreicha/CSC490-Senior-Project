@@ -71,32 +71,35 @@ function getSchedID() {
     $date = date("m/d/Y");
     $timestamp = strtotime($date);
     $day = date('w', $timestamp);
-    if($date == 1){
-        return $schedID;    
-  }
-    elseif($date == 2){
-        $schedID = strtotime('-1 day', $timestamp);
-        return $schedID;
-    }
-    elseif($date == 3){
-        $schedID = strtotime('-2 day', $timestamp);
-        return $schedID;
-    }
-    elseif($date == 4){
-        $schedID = strtotime('-3 day', $timestamp);
-        return $schedID;
-    }
-    elseif($date == 5){
-        $schedID = strtotime('-4 day', $timestamp);
-        return $schedID;
-    }
-    elseif($date == 6){
-        $schedID = strtotime('-5 day', $timestamp);
-        return $schedID;
-    }
-    elseif($date == 7){
-        $schedID = strtotime('-6 day', $timestamp);
-        return $schedID;
+    switch($day) {
+        case 1:
+            $schedID = $timestamp;
+            return $schedID; 
+            break;
+        case 2: 
+            $schedID = strtotime('-1 day', $timestamp);
+            return $schedID;
+            break;
+        case 3: 
+            $schedID = strtotime('-2 day', $timestamp);
+            return $schedID;
+            break;
+        case 4: 
+            $schedID = strtotime('-3 day', $timestamp);
+            return $schedID;
+            break;
+        case 5: 
+            $schedID = strtotime('-4 day', $timestamp);
+            return $schedID;
+            break;
+        case 6: 
+            $schedID = strtotime('-5 day', $timestamp);
+            return $schedID;
+            break;
+        case 7: 
+            $schedID = strtotime('-6 day', $timestamp);
+            return $schedID;
+            break;
     }
 
 }
