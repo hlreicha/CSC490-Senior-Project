@@ -1,5 +1,5 @@
 <?php
-$servername = "3.15.184.45:3306";
+$servername = "3.134.108.106:3306";
 $username = "mysql";
 $password = "Moscow34";
 $dbname = "Joe";
@@ -11,8 +11,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
-$schedid = noCarl1();
-$empID = 1;
+//$date = getScheduleID();
+$schedid = getSchedID();
+$empID = 0;
 $sql = "SELECT Start_time, End_Time, Position FROM `Schedule` WHERE Schedule_ID = $schedid and Employee_ID = $empID";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -51,31 +52,57 @@ function noCarl1(){
 		if($date > $week){
 			$startID = $week;
 			$week = $week + 604800;
-			echo "  ". $startID . "  ";
+			//echo "  ". $startID . "  ";
 		}
 
 		if($date <= $week){
 			$test = False;
-			echo "This is the engine that the kids like " .$startID;
+			//echo "This is the engine that the kids like " .$startID;
 			
 		}
 	}
 
 		return $startID;
 	}
-function getScheduleID(){
+	
+
+function getSchedID() {
     date_default_timezone_set('America/New_York');
-    $date = date('m/d/Y h:i:s a', time());
-    $date = strtotime($date);
-    $date->setTime(14, 55);
-    echo $date->format('Y-m-d H:i:s') . "\n";
-
-    return $date;
-
-
-
+    $date = date("m/d/Y");
+    $timestamp = strtotime($date);
+    $day = date('w', $timestamp);
+    if($date == 1){
+        return $schedID;    
+  }
+    elseif($date == 2){
+        $schedID = strtotime('-1 day', $timestamp);
+        return $schedID;
+    }
+    elseif($date == 3){
+        $schedID = strtotime('-2 day', $timestamp);
+        return $schedID;
+    }
+    elseif($date == 4){
+        $schedID = strtotime('-3 day', $timestamp);
+        return $schedID;
+    }
+    elseif($date == 5){
+        $schedID = strtotime('-4 day', $timestamp);
+        return $schedID;
+    }
+    elseif($date == 6){
+        $schedID = strtotime('-5 day', $timestamp);
+        return $schedID;
+    }
+    elseif($date == 7){
+        $schedID = strtotime('-6 day', $timestamp);
+        return $schedID;
+    }
 
 }
+
+
+	
 
 
 
