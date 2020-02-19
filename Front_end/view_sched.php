@@ -51,18 +51,31 @@ function noCarl1(){
 		if($date > $week){
 			$startID = $week;
 			$week = $week + 604800;
-			//echo "  ". $startID . "  ";
+			echo "  ". $startID . "  ";
 		}
 
 		if($date <= $week){
 			$test = False;
-			//echo "This is the engine that the kids like " .$startID;
+			echo "This is the engine that the kids like " .$startID;
 			
 		}
 	}
 
 		return $startID;
 	}
+function getScheduleID(){
+    date_default_timezone_set('America/New_York');
+    $date = date('m/d/Y h:i:s a', time());
+    $date = strtotime($date);
+    $date->setTime(14, 55);
+    echo $date->format('Y-m-d H:i:s') . "\n";
+
+    return $date;
+
+
+
+
+}
 
 
 
