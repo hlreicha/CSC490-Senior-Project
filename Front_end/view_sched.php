@@ -13,6 +13,7 @@ if (!$conn) {
 }
 //$date = getScheduleID();
 $schedid = getSchedID();
+//echo "the schedid is: ". $schedid; 
 $empID = 0;
 $sql = "SELECT Start_time, End_Time, Position FROM `Schedule` WHERE Schedule_ID = $schedid and Employee_ID = $empID";
 $result = $conn->query($sql);
@@ -71,33 +72,42 @@ function getSchedID() {
     $date = date("m/d/Y");
     $timestamp = strtotime($date);
     $day = date('w', $timestamp);
+	//echo "the day is: " . $day;
     switch($day) {
+		
         case 1:
             $schedID = $timestamp;
+			//echo $schedid;
             return $schedID; 
             break;
         case 2: 
             $schedID = strtotime('-1 day', $timestamp);
+			//echo $schedid;
             return $schedID;
             break;
         case 3: 
             $schedID = strtotime('-2 day', $timestamp);
+			//echo $schedid;
             return $schedID;
             break;
         case 4: 
             $schedID = strtotime('-3 day', $timestamp);
+			//echo $schedid;
             return $schedID;
             break;
         case 5: 
             $schedID = strtotime('-4 day', $timestamp);
+			//echo $schedid;
             return $schedID;
             break;
         case 6: 
             $schedID = strtotime('-5 day', $timestamp);
+			//echo $schedid;
             return $schedID;
             break;
-        case 7: 
+        case 0: 
             $schedID = strtotime('-6 day', $timestamp);
+			//echo $schedid;
             return $schedID;
             break;
     }
