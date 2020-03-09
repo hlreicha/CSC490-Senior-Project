@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WJJC Log In Page</title>
+<!--imported from bootstrap website from here until closing head tag-->
+<meta charset="utf-8">
+<!--this allows the webpage to be the length and zoom of device being used-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--this is the information taken from getbootstrap.com-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <!--This is the main jumbotron for the log in, logo will be added-->
+    <div class="jumbotron jumbotron-fluid">
+        <!--describes the container with the log in text, logo will be added-->
+            <div class="container">
+                <h1 class="display-1">Log In</h1>
+            </div>
+        </div>
+    <!--this is the container for the username and password form-->
+    <div class="container">
+        <!--sends input to arbitrary action page, adjust in final-->
+        <form action="/action_page.php">
+        <!--formatting for input box-->
+        <div class="form-group row">
+            <div class="col-xs-3">
+                <!--this box is for the user id-->
+                <label for="usr">User ID:</label>
+                <input type="text" class="form-control input-lg" id="usr" name="username">
+              </div>
+            </div>
+        <!--formatting for input box-->
+        <div class="form-group row">
+            <div class="col-xs-3">
+            <!--this box is for the password-->
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control input-lg" id="pwd" name="password">
+            </div>
+        </div>
+        <!--button to submit and check if credentials pass-->
+        <!--currently, has no authentication check, just passes to employee screen default-->
+        <a href="490employeehome.html" button type="submit" class="btn btn-primary">Submit</button>
+        <!--end form-->
+        </form>
+    </div>
+</body>
+<!--javascript pulled from bootstrap website-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
