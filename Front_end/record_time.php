@@ -126,15 +126,86 @@ function checkWorkedTable($empID,$schedID, $dayCode){
 	 
 }
 	
+	function get_isSched($empID,$schedID, $dayCode){
+	 //checks if the user already clocks in. Returns true(1) or false (0)
+	 $conn = connection();
+	 $SQL = "Select * from worked where SchedID = $schedID and Employee_ID = $empID and DayCode = $dayCode and isClockedIN = 1";
 
-function insertToWorked($empID,$schedID,$daycode,$recorded_start,$recorded_end,$isLate,$isSched,$isClockedin){
+
+
+     $duplicate=mysqli_query($conn,$SQL) or die(mysqli_error());
+	 while($row = mysqli_fetch_assoc($duplicate)) {
+		$isSched = $row['isSched'];
+		//echo "the isSched from the function is: " .$isSched . "<br>";
+} 
+	
+	 return $isSched;
+	 
+}
+
+function get_hoursWorked($empID,$schedID, $dayCode, $date_clicked) {
+         //gets hours worked in the shift. Get clocked out time - recorded start time
+		$start = get_StartTime($empID,$schedID,$dayCode);
+		
+ 
+       $hoursWorked = $date_clicked - $start;
+	   //echo "hours worked is: " . $hoursWorked . "<br>";
+	
+	 return $hoursWorked;
+	
+}
+
+function get_StartTime($empID,$schedID, $dayCode){
+	//get recorded start time. Originally this function was in get_HoursWorked but I  split it to experiment with something.
 	$conn = connection();
+	 $SQL = "Select * from worked where SchedID = $schedID and Employee_ID = $empID and DayCode = $dayCode and isClockedIN = 1";
+
+
+
+     $duplicate=mysqli_query($conn,$SQL) or die(mysqli_error());
+	 while($row = mysqli_fetch_assoc($duplicate)) {
+		$start = $row['Recorded_Start'];
+		//echo "the start from the function is: " .$start . "<br>";
+		
+} 
+	 return $start;
+	
+	
+}
+
+function get_EndTime($empID,$schedID, $dayCode) {
+	//get scheduled end time
+	$conn = connection();
+	 $SQL = "Select * from schedule where SchedID = $schedID and Employee_ID = $empID and DayCode = $dayCode";
+
+
+
+     $duplicate=mysqli_query($conn,$SQL) or die(mysqli_error());
+	 while($row = mysqli_fetch_assoc($duplicate)) {
+		$end = $row['End_Time'];
+		//echo "the start from the function is: " .$end . "<br>";
+		
+} 
+	 return $end;
+	
+	
+	
+	
+}
+	
+
+function insertToWorked($empID,$schedID,$daycode,$recorded_start,$recorded_end,$hoursWorked,$isLate,$isSched, $leftEarly, $isClockedin){
+	//Insert to worked table if you are clocking in, update worked table if you are clocking out.
+	
+	$conn = connection();
+	
+	//echo "the clocked in in this function is: " . $isClockedIn . "<br>";
 	if($isClockedin== 0) {
 	  //sets clocked in as 1 because user just clocked in. This variable is important because if isClockedin = 1, next time user punches the user will punch out
 	  $isClockedin = 1;
 	  //sql insert statement
-	  $insertSQL =  "INSERT INTO worked (Employee_ID,SchedID, DayCode, Recorded_Start,Recorded_End, isLate,isSched,isClockedIn) 
-	  VALUES ($empID,$schedID,$daycode,$recorded_start,$recorded_end,$isLate,$isSched,$isClockedin)";
+	  $insertSQL =  "INSERT INTO worked (Employee_ID,SchedID, DayCode, Recorded_Start,Recorded_End,`Hours Worked`, isLate,isSched, leftEarly, isClockedIn) 
+	  VALUES ($empID,$schedID,$daycode,$recorded_start,$recorded_end,0,$isLate,$isSched, 0, $isClockedin)";
 	  if($conn->query($insertSQL) === TRUE) {
 		echo "Clocked In";
 		return 0;
@@ -150,7 +221,8 @@ function insertToWorked($empID,$schedID,$daycode,$recorded_start,$recorded_end,$
 	elseif ($isClockedin== 1){
 		//if the user already clocked in, set the isClockedIn variable to 0. This occurs when the user is clocking out.
 		$isClockedin = 0;
-		$updateSQL = "UPDATE `worked` SET `Recorded_End`= $recorded_end, `isClockedIn`= $isClockedin WHERE  `Employee_ID` = $empID and `SchedID` = $schedID and `DayCode` = $daycode";
+		//updates recorded_end, leftEarly, isClockedIn, and Hours Worked columns in the table.
+		$updateSQL = "UPDATE `worked` SET `Recorded_End`= $recorded_end, `leftEarly` = $leftEarly, `isClockedIn`= $isClockedin, `Hours Worked` = $hoursWorked WHERE  `Employee_ID` = $empID and `SchedID` = $schedID and `DayCode` = $daycode and `isClockedIn` = 1";
 		if($conn->query($updateSQL) === TRUE) {
 		echo " Clocked Out";
 		return 0;
@@ -172,23 +244,21 @@ function check($date_clicked){
 	
 	 //get schedule ID for the week.
      $schedID = getSchedID(True,$date_clicked);
-	// echo "schedID is: " .$schedID . "<br>";
+
 	//Day Code is the number of day in the week. For example, Monday will be 1.
 	 $dayCode = getDayCode($date_clicked);
-	 //echo "the day code is: " . $dayCode . "<br>";
-	 //echo "The schedule ID is:  " . $schedID . "<br>";
+
      $conn = connection();
 	 //$conn2 = connection();
 	 
 	 //session ID here
 	 $empID = 0;
-	 
-	 
 	 $checkSQL = "Select * from schedule WHERE SchedID = $schedID and Employee_ID = $empID  and DayCode = $dayCode";
 	
 	 $isLate = 0;
 	 //$cbt = True;
 	 $isScheduled = 1;
+	 $leftEarly = 0;
 	
 	 //calls function to check if the user has previously clocked in before.
 	 $clockedIN= checkWorkedTable($empID, $schedID, $dayCode);
@@ -200,15 +270,13 @@ function check($date_clicked){
 	$result = $conn->query($checkSQL);
 	if ($result->num_rows > 0){
 		
-		echo "im scared " . "<br>";
 		
 	while ($row = $result->fetch_assoc()) {
 	    
-         //echo "will it print here?";		
-		    $schedTime =$row["Start_Time"];
-			//echo "This is schedtime" . $schedTime;
+   	
+		    $schedTime =$row["Start_Time"] + 3600;
+			//echo "This is schedtime from the for loop: " . $schedTime ."<br>";
 			
-			//echo "will it print here for cbt? " ;
 			//Converts Start Time from Schedule Table to Timestamp and removes hours and minutes
 			$schedTimestamp = strtotime(date("y-m-d", $schedTime)) + 3600;
 			//echo " wtf ". $schedTimestamp . "  ";
@@ -220,15 +288,16 @@ function check($date_clicked){
 			//if($schedTimestamp == $date_clicked_Timestamp){
 				
 				//check to see if you are late
-				$test = $date_clicked - $schedTime;
-				//echo " The test result is: " .$test;
-				//echo "chowdah I require an immediate cbt";
-				if( $test >= 420){
+				$test = ($date_clicked - $schedTime);
+				//echo " The sched time is: " . $schedTime . "<br>";
+		
+				//echo " The test result is: " .$test . "<br>";
+	
+				if( $test >= 60){
 					$isLate = 1;
-					//echo " cbt in if ";
 					echo $isLate;
 				}
-				insertToWorked($empID,$schedID,$dayCode,$date_clicked,0,$isLate,$isScheduled,$clockedIN);
+				insertToWorked($empID,$schedID,$dayCode,$date_clicked,0,0,$isLate,$isScheduled,$leftEarly,$clockedIN);
 				
 				
 			//}
@@ -249,18 +318,44 @@ function check($date_clicked){
 		//in case you are not scheduled simply insert your time here
 		$isScheduled = 0;
 		$clockedIN = 0;
-		echo "emp id: " . $empID . " SchedID: " .$schedID . " Day code: " . $dayCode . " Sched Start " . $date_clicked 
-		. " Sched end: " . 0 . " is Late: " . $isLate . " is Sched: " .$isScheduled . " clocked in: " .$clockedIN . "<br>";
-		insertToWorked($empID,$schedID,$dayCode,$date_clicked,0,$isLate,$isScheduled,$clockedIN);
-		echo " else condition ";
+		//echo "emp id: " . $empID . " SchedID: " .$schedID . " Day code: " . $dayCode . " Sched Start " . $date_clicked 
+		//. " Sched end: " . 0 . " is Late: " . $isLate . " is Sched: " .$isScheduled . " clocked in: " .$clockedIN . "<br>";
+		
+		insertToWorked($empID,$schedID,$dayCode,$date_clicked,0,0,$isLate,$isScheduled,$leftEarly,$clockedIN);
+		//echo "This prints when you are not scheduled  ";
 		
 	}
 	}
 	//If you already clocked in before, it now clocks out.
 	elseif($clockedIN == 1){
-		//echo " clocking out" . "<br>";
-		insertToWorked($empID,$schedID,$dayCode,0,$date_clicked,$isLate,$isScheduled,$clockedIN);
+		//echo "the clockedIN below elseif is: " . $clockedIN ."<br>";
+		$isScheduled = get_isSched($empID,$schedID, $dayCode);
 		
+		if($isScheduled == 0) {
+		//echo " The isschedule is: " . $isScheduled . "<br>";
+		$hoursWorked = get_hoursWorked($empID,$schedID, $dayCode, $date_clicked);
+		
+		insertToWorked($empID,$schedID,$dayCode,0,$date_clicked,$hoursWorked,$isLate,$isScheduled,$leftEarly,$clockedIN);
+		}
+		else if ($isScheduled == 1) {
+			//get scheduled end time
+			$endTime = get_EndTime($empID,$schedID,$dayCode) +3600;
+			$hoursWorked = get_hoursWorked($empID,$schedID, $dayCode, $date_clicked);
+			//subtract scheduled end time from clocked out time (date_clicked)
+			$time = $endTime - $date_clicked;
+			
+			//echo "the time is: " . $time ."<br>";
+			//if you leave more then 5 minutes early, leftEarly flag will be marked true.
+			if($time > 300){
+				$leftEarly = 1;
+				
+			}
+			
+			insertToWorked($empID,$schedID,$dayCode,0,$date_clicked,$hoursWorked,$isLate,$isScheduled,$leftEarly,$clockedIN);
+			
+			
+			
+		}
 	}
 	
 	return 0;
@@ -277,11 +372,11 @@ if(isset($_POST['click']))
 {
 	date_default_timezone_set('America/New_York');
     $date_clicked = date('m/d/Y h:i:s a', time());
-    echo "Time the button was clicked: " . $date_clicked . "<br>";
+    //echo "Time the button was clicked: " . $date_clicked . "<br>";
 	
 	//have to add hr (+3600) for some reason to get correct time, despite setting the correct time zone.
 	$test = strtotime($date_clicked) + 3600;
-	echo " timestamp of date is: " .$test . "<br>";
+	//echo " timestamp of date is: " .$test . "<br>";
 	check($test);
 	
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2020 at 11:51 PM
+-- Generation Time: Mar 22, 2020 at 11:08 PM
 -- Server version: 10.2.10-MariaDB
 -- PHP Version: 7.2.28
 
@@ -94,7 +94,10 @@ INSERT INTO `request` (`Employee_ID`, `SchedID`, `DayCode`, `Day`, `Reason`) VAL
 (0, 1587358800, 5, 1587700800, 'hey man'),
 (0, 1587358800, 6, 1587787200, 'hey man'),
 (0, 1587963600, 1, 1587960000, 'hey man'),
-(0, 1587963600, 2, 1588046400, 'hey man');
+(0, 1587963600, 2, 1588046400, 'hey man'),
+(0, 1590987600, 4, 1591243200, 'hey man'),
+(0, 1590987600, 5, 1591329600, 'hey man'),
+(0, 1590987600, 6, 1591416000, 'hey man');
 
 -- --------------------------------------------------------
 
@@ -116,6 +119,7 @@ CREATE TABLE `schedule` (
 --
 
 INSERT INTO `schedule` (`SchedID`, `Employee_ID`, `DayCode`, `Start_Time`, `End_Time`, `Position`) VALUES
+(1584334800, 0, 0, 1584917400, 1584917640, 'Test 3'),
 (1584334800, 0, 3, 1584579600, 1584583200, 'Test'),
 (1584334800, 0, 6, 1584835500, 0, 'Test 2');
 
@@ -126,15 +130,27 @@ INSERT INTO `schedule` (`SchedID`, `Employee_ID`, `DayCode`, `Start_Time`, `End_
 --
 
 CREATE TABLE `worked` (
+  `WorkedID` int(11) NOT NULL,
   `Employee_ID` int(11) NOT NULL,
   `SchedID` int(11) NOT NULL,
   `DayCode` int(10) NOT NULL,
   `Recorded_Start` int(11) NOT NULL,
   `Recorded_End` int(11) NOT NULL,
+  `Hours Worked` int(5) NOT NULL DEFAULT 0,
   `isLate` tinyint(1) NOT NULL DEFAULT 0,
   `isSched` tinyint(1) NOT NULL DEFAULT 1,
+  `leftEarly` tinyint(1) NOT NULL DEFAULT 0,
   `isClockedIn` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `worked`
+--
+
+INSERT INTO `worked` (`WorkedID`, `Employee_ID`, `SchedID`, `DayCode`, `Recorded_Start`, `Recorded_End`, `Hours Worked`, `isLate`, `isSched`, `leftEarly`, `isClockedIn`) VALUES
+(1, 0, 1584334800, 0, 1584920897, 1584921372, 475, 0, 1, 0, 0),
+(2, 0, 1584334800, 0, 1584921410, 1584921412, 2, 1, 1, 0, 0),
+(3, 0, 1584334800, 0, 1584921556, 1584921594, 38, 1, 1, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -170,8 +186,19 @@ ALTER TABLE `schedule`
 -- Indexes for table `worked`
 --
 ALTER TABLE `worked`
-  ADD PRIMARY KEY (`Employee_ID`,`SchedID`,`DayCode`),
-  ADD KEY `worked_ibfk_1` (`SchedID`);
+  ADD PRIMARY KEY (`WorkedID`),
+  ADD KEY `Employee_ID` (`Employee_ID`),
+  ADD KEY `SchedID` (`SchedID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `worked`
+--
+ALTER TABLE `worked`
+  MODIFY `WorkedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -193,8 +220,8 @@ ALTER TABLE `schedule`
 -- Constraints for table `worked`
 --
 ALTER TABLE `worked`
-  ADD CONSTRAINT `worked_ibfk_1` FOREIGN KEY (`SchedID`) REFERENCES `schedule` (`SchedID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `worked_ibfk_2` FOREIGN KEY (`Employee_ID`) REFERENCES `employee` (`Employee_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `worked_ibfk_1` FOREIGN KEY (`Employee_ID`) REFERENCES `employee` (`Employee_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `worked_ibfk_2` FOREIGN KEY (`SchedID`) REFERENCES `schedule` (`SchedID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
