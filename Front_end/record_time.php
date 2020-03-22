@@ -295,7 +295,7 @@ function check($date_clicked){
 	
 				if( $test >= 60){
 					$isLate = 1;
-					echo $isLate;
+					//echo $isLate;
 				}
 				insertToWorked($empID,$schedID,$dayCode,$date_clicked,0,0,$isLate,$isScheduled,$leftEarly,$clockedIN);
 				
