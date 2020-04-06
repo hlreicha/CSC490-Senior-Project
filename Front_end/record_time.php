@@ -274,11 +274,11 @@ function check($date_clicked){
 	while ($row = $result->fetch_assoc()) {
 	    
    	
-		    $schedTime =$row["Start_Time"] + 3600;
+		    $schedTime =$row["Start_Time"];
 			//echo "This is schedtime from the for loop: " . $schedTime ."<br>";
 			
 			//Converts Start Time from Schedule Table to Timestamp and removes hours and minutes
-			$schedTimestamp = strtotime(date("y-m-d", $schedTime)) + 3600;
+			//$schedTimestamp = strtotime(date("y-m-d", $schedTime)) + 3600;
 			//echo " wtf ". $schedTimestamp . "  ";
 			//Converts Date_clicked date to Timestamp and removes hours and minutes
             $date_clicked_Timestamp = strtotime(date("y-m-d", $date_clicked)) + 3600;
@@ -289,15 +289,17 @@ function check($date_clicked){
 				
 				//check to see if you are late
 				$test = ($date_clicked - $schedTime);
-				//echo " The sched time is: " . $schedTime . "<br>";
+				echo " The sched time is: " . $schedTime . "<br>";
+				echo "The date clicked is: " . $date_clicked . "<br>";
 		
-				//echo " The test result is: " .$test . "<br>";
 	
 				if( $test >= 60){
 					$isLate = 1;
 					//echo $isLate;
 				}
 				insertToWorked($empID,$schedID,$dayCode,$date_clicked,0,0,$isLate,$isScheduled,$leftEarly,$clockedIN);
+				
+				echo "the day code is: " . $dayCode;
 				
 				
 			//}
@@ -375,7 +377,8 @@ if(isset($_POST['click']))
     //echo "Time the button was clicked: " . $date_clicked . "<br>";
 	
 	//have to add hr (+3600) for some reason to get correct time, despite setting the correct time zone.
-	$test = strtotime($date_clicked) + 3600;
+	//If shit blows up, add +3600 and debug.
+	$test = strtotime($date_clicked);
 	//echo " timestamp of date is: " .$test . "<br>";
 	check($test);
 	
