@@ -124,12 +124,12 @@ function getDayCode($date){
            $Recorded_Start = strtotime(mysqli_real_escape_string($connect, $_POST["Recorded_Start"])); 
 		   $Recorded_End = strtotime(mysqli_real_escape_string($connect, $_POST["Recorded_End"]));
 		   
-
+		   $hours_worked = $Recorded_End - $Recorded_Start;
 		   $check = check($Recorded_Start,$Recorded_End,$SchedID);
            $procedure = "  
-                CREATE PROCEDURE updateUser(id int(11), Recorded_Start int(11), Recorded_End int(11))  
+                CREATE PROCEDURE updateUser(id int(11), Recorded_Start int(11), Recorded_End int(11), hours_worked int(5))  
                 BEGIN   
-                UPDATE worked SET Recorded_Start = Recorded_Start, Recorded_End = Recorded_End  
+                UPDATE worked SET Recorded_Start = Recorded_Start, Recorded_End = Recorded_End, `Hours Worked` = hours_worked  
                 WHERE WorkedID = id;  
                 END;   
            ";  
@@ -139,8 +139,8 @@ function getDayCode($date){
            {  
                 if(mysqli_query($connect, $procedure))  
                 {  
-				     echo "ProductID is: " . $id;
-                     $query = "CALL updateUser('".$id."','".$Recorded_Start."', '".$Recorded_End."')";  
+				     //echo "ProductID is: " . $id;
+                     $query = "CALL updateUser('".$id."','".$Recorded_Start."', '".$Recorded_End."', '".$hours_worked."')";  
                      mysqli_query($connect, $query) or die(mysqli_error($connect));  
                      echo 'Data Updated';  
                 }  

@@ -1,6 +1,6 @@
 <html>  
       <head>  
-           <title>Inventory Page</title> 
+           <title>Worked Schedule Page</title> 
 
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -43,7 +43,7 @@
            <div class="container">  
 		   <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h3 align="center">Inventory</h3>  
+                <h3 align="center">Worked Schedule</h3>  
                 <br /><br />  
                 <br /><br />
                 <label>Worked ID</label>  
