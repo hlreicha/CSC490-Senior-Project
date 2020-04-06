@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "hlreicha";
 $password = "Moscow34!!";
-$dbname = "Joe";
+$dbname = "Test";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -13,14 +13,15 @@ if (!$conn) {
 }
 //$date = getScheduleID();
 $schedid = getSchedID();
-//echo "the schedid is: ". $schedid; 
+//echo "the schedid is: ". $schedid;
+
 $empID = 0;
-$sql = "SELECT Start_time, End_Time, Position FROM `Schedule` WHERE Schedule_ID = $schedid and Employee_ID = $empID";
+$sql = "SELECT Start_Time, End_Time, Position FROM `schedule` WHERE SchedID = $schedid and Employee_ID = $empID";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
-		$Start = $row["Start_time"];
+		$Start = $row["Start_Time"];
 		$End = $row["End_Time"];
 		$Start = Time1($Start);
 		$End = Time1($End);
@@ -69,8 +70,9 @@ function noCarl1(){
 
 function getSchedID() {
     date_default_timezone_set('America/New_York');
+	//echo date_default_timezone_get (  );
     $date = date("m/d/Y");
-    $timestamp = strtotime($date);
+    $timestamp = strtotime($date)+3600;
     $day = date('w', $timestamp);
 	//echo "the day is: " . $day;
     switch($day) {
