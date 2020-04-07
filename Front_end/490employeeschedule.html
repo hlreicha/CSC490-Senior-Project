@@ -12,54 +12,65 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
+             <!--adds the logo to the page-->
+             <img src="WJJC-logo.png" class="float-right">
             <!--at some point, have display appropriate employee id-->
             <h1 class="display-2">Schedule for "EmpID"</h1>
         </div>
         </div>
-    </div>
-    <!--builds structure for sidebar menu-->
-    <div class="wrapper">
-        <!--defines set of navigation links-->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Employee Menu</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                <!--builds structure for sidebar menu-->
+                 <div class="wrapper">
+                    <!--defines set of navigation links-->
+                    <nav id="sidebar">
+                        <div class="sidebar-header">
+                            <h3>Employee Menu</h3>
+                        </div>
+                        <ul class="list-unstyled components">
+                            <li class="active">
+                                <li>
+                                    <!--link to home page-->
+                                    <a href="490employeehome.html">Home</a>
+                                </li>
+                                <li>
+                                    <!--drops to display account options for employee-->
+                                    <a href="#empAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
+                                        <ul class="collapse list-unstyled" id="empAccount">
+                                            <li>
+                                                <!--link to change password page-->
+                                                <a href="490employeechangepassword.html">Change Password</a> <!--add link to page-->
+                                            </li>
+                                        </ul>
+                                </li>
+                                <!--drops to display schedule options for employee-->
+                                <a href="#empSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
+                                    <ul class="collapse list-unstyled" id="empSchedule">
+                                        <li>
+                                            <!--link to schedule page-->
+                                            <a href="490employeeschedule.html">View Schedule</a><!--add link to page-->
+                                        </li>
+                                        <li>
+                                            <!--link to request time off page-->
+                                            <a href="490employeetimeoff.html">Request Time Off</a><!--add link to page-->
+                                        </li>
+                                     </ul>
+                            </li>
+                            <li>
+                                <!--link to instruction page for employees-->
+                                <a href="490employeeinstructions.html">Instructions</a><!--add link to page-->
+                            </li>
+                            <li>
+                                <a href="490login.html">Log Out</a><!--log out link-->
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <li>
-                        <!--link to home page-->
-                        <a href="490employeehome.html">Home</a>
-                    </li>
-                    <li>
-                    <!--drops to display account options for employee-->
-                    <a href="#empAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
-                    <ul class="collapse list-unstyled" id="empAccount">
-                        <li>
-                            <!--link to change password page-->
-                            <a href="490employeechangepassword.html">Change Password</a> <!--add link to page-->
-                        </li>
-                    </ul>
-                    </li>
-                    <!--drops to display schedule options for employee-->
-                    <a href="#empSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
-                    <ul class="collapse list-unstyled" id="empSchedule">
-                        <li>
-                            <!--link to schedule page-->
-                            <a href="490employeeschedule.html">View Schedule</a><!--add link to page-->
-                        </li>
-                        <li>
-                            <!--link to request time off page-->
-                            <a href="490employeetimeoff.html">Request Time Off</a><!--add link to page-->
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <!--link to instruction page for employees-->
-                    <a href="490employeeinstructions.html">Instructions</a><!--add link to page-->
-                </li>
-            </ul>
-        </nav>
+        </div>
     </div>
+                
 
 
 

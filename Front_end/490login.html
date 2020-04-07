@@ -11,40 +11,47 @@
 </head>
 
 <body>
-    <!--This is the main jumbotron for the log in, logo will be added-->
+    <!--This is the main jumbotron for the log in-->
     <div class="jumbotron jumbotron-fluid">
         <!--describes the container with the log in text, logo will be added-->
-            <div class="container">
-                <h1 class="display-1">Log In</h1>
-            </div>
+        <div class="container">
+            <h1 class="display-1">Log In</h1>
         </div>
+    </div>
+
+
     <!--this is the container for the username and password form-->
     <div class="container">
         <!--sends input to arbitrary action page, adjust in final-->
         <form action="/action_page.php">
-        <!--formatting for input box-->
-        <div class="form-group row">
-            <div class="col-xs-3">
+            <!--formatting for input box-->
+            <div class="form-group">
                 <!--this box is for the user id-->
                 <label for="usr">User ID:</label>
-                <input type="text" class="form-control input-lg" id="usr" name="username">
-              </div>
+                    <input type="text" class="form-control" placeholder="User ID" id="usr" name="username">
             </div>
         <!--formatting for input box-->
-        <div class="form-group row">
-            <div class="col-xs-3">
-            <!--this box is for the password-->
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control input-lg" id="pwd" name="password">
+            <div class="form-group">
+                <!--this box is for the password-->
+                <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" placeholder="Password" id="pwd" name="password">
             </div>
-        </div>
+
         <!--button to submit and check if credentials pass-->
         <!--currently, has no authentication check, just passes to employee screen default-->
-        <a href="490employeehome.html" button type="submit" class="btn btn-primary">Submit</button>
+        <a href="490employeehome.html" class="btn btn-primary">Submit</a>
         <!--end form-->
         </form>
     </div>
-</body>
+
+<!--test function for submit button
+<script>
+    function logIn() {
+        window.location.href("490employeehome.html");
+    }
+</script>
+-->
+
 <!--javascript pulled from bootstrap website-->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
