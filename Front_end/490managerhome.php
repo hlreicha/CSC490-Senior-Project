@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Manager Home Page</title>
@@ -45,7 +44,7 @@
                         <li class="active">
                         <li>
                             <!--link to home page-->
-                            <a href="490managerhome.html">Home</a>
+                            <a href="490managerhome.php">Home</a>
                         </li>
                         <li>
                             <!--drops to display account options for employee-->
@@ -53,7 +52,7 @@
                             <ul class="collapse list-unstyled" id="manAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="490managerchangepassword.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -62,25 +61,25 @@
                         <ul class="collapse list-unstyled" id="manSchedule">
                             <li>
                                 <!--link to schedule page-->
-                                <a href="#">View Schedule</a><!--add link to page-->
+                                <a href="490managerviewschedule.php">View Schedule</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to request time off page-->
-                                <a href="#">Request Time Off</a><!--add link to page-->
+                                <a href="490managertimeoff.php">Request Time Off</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to create schedule-->
-                                <a href="#">Create Schedule</a><!--add link to page-->
+                                <a href="490managercreateschedule.php">Create Schedule</a><!--add link to page-->
                             </li>
                         </ul>
                         <li>
                             <!--link to inventory page for managers-->
-                            <a href="490managerinventory.html">Check Inventory</a><!--add link to page-->
+                            <a href="490managerinventory.php">Check Inventory</a><!--add link to page-->
                         </li>
                         </li>
                         <li>
                             <!--link to instruction page for managers-->
-                            <a href="#">Instructions</a><!--add link to page-->
+                            <a href="490managerinstructions.php">Instructions</a><!--add link to page-->
                         </li>
                         <li>
                             <a href="#">Log Out</a><!--log out link-->
@@ -88,10 +87,9 @@
                     </ul>
                     </nav>
                 </div>
-            </div>
+            </div><!--end of sidebar-->
 
-            <!--This is where form starts-->
-        </div>
-    </div>
+        </div><!--end of row-->
+    </div><!--end of container-->
 </body>
 </html>
