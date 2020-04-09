@@ -44,7 +44,7 @@
                         <li class="active">
                         <li>
                             <!--link to home page-->
-                            <a href="490managerhome.php">Home</a>
+                            <a href="490managerhome.html">Home</a>
                         </li>
                         <li>
                             <!--drops to display account options for employee-->
@@ -52,7 +52,7 @@
                             <ul class="collapse list-unstyled" id="manAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="490managerchangepassword.php">Change Password</a> <!--add link to page-->
+                                <a href="#">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -65,11 +65,11 @@
                             </li>
                             <li>
                                 <!--link to request time off page-->
-                                <a href="490managertimeoff.php">Request Time Off</a><!--add link to page-->
+                                <a href="#">Request Time Off</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to create schedule-->
-                                <a href="490managercreateschedule.php">Create Schedule</a><!--add link to page-->
+                                <a href="#">Create Schedule</a><!--add link to page-->
                             </li>
                         </ul>
                         <li>
@@ -88,7 +88,7 @@
                     </nav>
                 </div>
             </div><!--end of sidebar-->
-
+            
         </div><!--end of row-->
     </div><!--end of container-->
 </body>

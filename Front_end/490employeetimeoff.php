@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Employee Time Off</title>
+<title>Manager Home Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,58 +21,67 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-             <!--adds the logo to the page-->
-             <img src="WJJC-logo.png" class="float-right">
+            <!--adds the logo to the page-->
+            <img src="WJJC-logo.png" class="float-right">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">Time Off for "EmpID"</h1>
-        </div>
+            <h1 class="display-2">Welcome "ManID"</h1>
         </div>
     </div>
-    <!--builds structure for sidebar menu-->
-    <div class="wrapper">
-        <!--defines set of navigation links-->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Employee Menu</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <li>
-                        <!--link to home page-->
-                        <a href="490employeehome.html">Home</a>
-                    </li>
-                    <li>
-                    <!--drops to display account options for employee-->
-                    <a href="#empAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
-                    <ul class="collapse list-unstyled" id="empAccount">
+
+    <div class="container-fluid">
+        <div class="row">
+
+                <!--builds structure for sidebar menu-->
+            <div class="col-2">
+                <!--builds structure for sidebar menu-->
+                 <div class="wrapper">
+                    <!--defines set of navigation links-->
+                    <nav id="sidebar">
+                        <div class="sidebar-header">
+                        <h3>Employee Menu</h3>
+                        </div>
+                    <ul class="list-unstyled components">
+                        <li class="active">
                         <li>
-                            <!--link to change password page-->
-                            <a href="490employeechangepassword.html">Change Password</a> <!--add link to page-->
+                            <!--link to home page-->
+                            <a href="490employeehome.php">Home</a>
+                        </li>
+                        <li>
+                            <!--drops to display account options for employee-->
+                            <a href="#empAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
+                            <ul class="collapse list-unstyled" id="empAccount">
+                                <li>
+                                <!--link to change password page-->
+                                <a href="490employeechangepassword.php">Change Password</a> <!--add link to page-->
+                                </li>
+                            </ul>
+                        </li>
+                        <!--drops to display schedule options for employee-->
+                        <a href="#empSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
+                        <ul class="collapse list-unstyled" id="empSchedule">
+                            <li>
+                                <!--link to schedule page-->
+                                <a href="490employeeviewschedule.php">View Schedule</a><!--add link to page-->
+                            </li>
+                            <li>
+                                <!--link to request time off page-->
+                                <a href="490employeetimeoff.php">Request Time Off</a><!--add link to page-->
+                            </li>
+                        </ul>
+                        </li>
+                        <li>
+                            <!--link to instruction page for managers-->
+                            <a href="490employeeinstructions.php">Instructions</a><!--add link to page-->
+                        </li>
+                        <li>
+                            <a href="#">Log Out</a><!--log out link-->
                         </li>
                     </ul>
-                    </li>
-                    <!--drops to display schedule options for employee-->
-                    <a href="#empSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
-                    <ul class="collapse list-unstyled" id="empSchedule">
-                        <li>
-                            <!--link to schedule page-->
-                            <a href="490employeeschedule.html">View Schedule</a><!--add link to page-->
-                        </li>
-                        <li>
-                            <!--link to request time off page-->
-                            <a href="490employeetimeoff.html">Request Time Off</a><!--add link to page-->
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <!--link to instruction page for employees-->
-                    <a href="490employeeinstructions.html">Instructions</a><!--add link to page-->
-                </li>
-                <li>
-                    <a href="490login.html">Log Out</a><!--log out link-->
-                </li>
-            </ul>
-        </nav>
-    </div>
+                    </nav>
+                </div>
+            </div><!--end of sidebar-->
+
+        </div><!--end of row-->
+    </div><!--end of container-->
 </body>
 </html>
