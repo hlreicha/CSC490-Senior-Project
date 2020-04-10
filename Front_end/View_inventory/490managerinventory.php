@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(isset($_SESSION['User'])) {
+  echo "Your session is running " . $_SESSION['User'];
+}
+else
+	{
+	header("location:index.php");
+	}
+?>
 <html lang="en">
 <head>
 <title>Manager Inventory Page</title>
@@ -44,7 +54,7 @@
                         <li class="active">
                         <li>
                             <!--link to home page-->
-                            <a href="490managerhome.html">Home</a>
+                            <a href="../login/490managerhome.php">Home</a>
                         </li>
                         <li>
                             <!--drops to display account options for employee-->
@@ -67,6 +77,10 @@
                                 <!--link to request time off page-->
                                 <a href="#">Request Time Off</a><!--add link to page-->
                             </li>
+							<li>
+                            <!--link to  worked page for managers-->
+                            <a href="../view_worked/490managerworked.php">View Hours Worked</a><!--add link to page-->
+                            </li>
                             <li>
                                 <!--link to create schedule-->
                                 <a href="#">Create Schedule</a><!--add link to page-->
@@ -82,7 +96,7 @@
                             <a href="#">Instructions</a><!--add link to page-->
                         </li>
                         <li>
-                            <a href="#">Log Out</a><!--log out link-->
+                            <a href="../login/logout.php?logout">Log Out</a><!--log out link-->
                         </li>
                     </ul>
                     </nav>
@@ -122,6 +136,7 @@
         </div>
     </div>
 </body>
+
 </html>
 
  <script>  
