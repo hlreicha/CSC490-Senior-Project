@@ -5,7 +5,7 @@ if(isset($_SESSION['User'])) {
 }
 else
 	{
-	header("location:index.php");
+	header("location:../login/index.php");
 	}
 ?>
 <html lang="en">

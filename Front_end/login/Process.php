@@ -36,7 +36,7 @@ session_start();
     }
     else
     {
-        echo 'Failure it major proportions';
+        echo 'Failure in major proportions';
     }
 
 ?>
