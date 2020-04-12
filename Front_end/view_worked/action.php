@@ -31,7 +31,7 @@ function getSchedID() {
     $timestamp = strtotime($date)+3600;
 	//$timestamp = strtotime($date);
     $day = date('w', $timestamp);
-	echo "the day is: " . $day;
+	//echo "the day is: " . $day;
     switch($day) {
 		
         case 1:
@@ -102,7 +102,9 @@ function getDayCode($date){
                 INSERT INTO worked(Employee_ID, SchedID, DayCode, Recorded_Start, Recorded_End, `Hours Worked`) VALUES (Employee_ID, SchedID, DayCode, Recorded_Start, Recorded_End, hours_worked);   
                 END;  
            "; 
-          if($check == True) {		   
+		   //$cbt = mysqli_query($connect, "DROP PROCEDURE IF EXISTS insertUser") or die(mysqli_error($connect);
+          if($check1 == True) {
+				
            if(mysqli_query($connect, "DROP PROCEDURE IF EXISTS insertUser"))  
            {  
                 if(mysqli_query($connect, $procedure))  

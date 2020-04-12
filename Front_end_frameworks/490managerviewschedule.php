@@ -92,4 +92,10 @@
         </div><!--end of row-->
     </div><!--end of container-->
 </body>
+<?php
+session_start();
+if(isset($_SESSION['User'])) {
+  echo "Your session is running " . $_SESSION['User'];
+}
+?>
 </html>
