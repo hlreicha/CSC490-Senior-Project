@@ -22,6 +22,18 @@
  
 
 <?php 
+session_start();
+if(isset($_SESSION['User'])) {
+  //echo "Your session is running " . $_SESSION['User'];
+  $empID = $_SESSION['User'];
+}
+else
+	{
+	header("location:../login/index.php");
+	}
+
+
+
 function connection() {
 	$servername = "localhost";
 	$username = "hlreicha";
@@ -252,7 +264,7 @@ function check($date_clicked){
 	 //$conn2 = connection();
 	 
 	 //session ID here
-	 $empID = 0;
+	 global $empID;
 	 $checkSQL = "Select * from schedule WHERE SchedID = $schedID and Employee_ID = $empID  and DayCode = $dayCode";
 	
 	 $isLate = 0;

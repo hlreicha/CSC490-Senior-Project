@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-<title>Employee Home Page</title>
+<title>Manager Home Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,7 @@
             <!--adds the logo to the page-->
             <img src="WJJC-logo.png" class="float-right">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">Welcome "EmpID"</h1>
+            <h1 class="display-2">Welcome "ManID"</h1>
         </div>
     </div>
 
@@ -44,34 +44,42 @@
                         <li class="active">
                         <li>
                             <!--link to home page-->
-                            <a href="490employeehome.php">Home</a>
+                            <a href="490managerhome.php">Home</a>
                         </li>
                         <li>
                             <!--drops to display account options for employee-->
-                            <a href="#empAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
-                            <ul class="collapse list-unstyled" id="empAccount">
+                            <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
+                            <ul class="collapse list-unstyled" id="manAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="490employeechangepassword.php">Change Password</a> <!--add link to page-->
+                                <a href="490managerchangepassword.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
                         <!--drops to display schedule options for employee-->
-                        <a href="#empSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
-                        <ul class="collapse list-unstyled" id="empSchedule">
+                        <a href="#manSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
+                        <ul class="collapse list-unstyled" id="manSchedule">
                             <li>
                                 <!--link to schedule page-->
-                                <a href="490employeeviewschedule.php">View Schedule</a><!--add link to page-->
+                                <a href="490managerviewschedule.php">View Schedule</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to request time off page-->
-                                <a href="490employeetimeoff.php">Request Time Off</a><!--add link to page-->
+                                <a href="490managertimeoff.php">Request Time Off</a><!--add link to page-->
+                            </li>
+                            <li>
+                                <!--link to create schedule-->
+                                <a href="490managercreateschedule.php">Create Schedule</a><!--add link to page-->
                             </li>
                         </ul>
+                        <li>
+                            <!--link to inventory page for managers-->
+                            <a href="490managerinventory.php">Check Inventory</a><!--add link to page-->
+                        </li>
                         </li>
                         <li>
                             <!--link to instruction page for managers-->
-                            <a href="490employeeinstructions.php">Instructions</a><!--add link to page-->
+                            <a href="#">Instructions</a><!--add link to page-->
                         </li>
                         <li>
                             <a href="#">Log Out</a><!--log out link-->
@@ -81,12 +89,13 @@
                 </div>
             </div><!--end of sidebar-->
 
-            <!--clock in/out area-->
-            <div class="col-8">
-                <button type="button" class="btn btn-primary btn-lg" align="middle">Clock</button>
-            </div>
-
         </div><!--end of row-->
     </div><!--end of container-->
 </body>
+<?php
+session_start();
+if(isset($_SESSION['User'])) {
+  echo "Your session is running " . $_SESSION['User'];
+}
+?>
 </html>

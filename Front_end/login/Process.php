@@ -11,11 +11,22 @@ session_start();
        {
             $query="select * from employee where Employee_ID='".$_POST['Employee_ID']."' and Password='".$_POST['Password']."'";
             $result=mysqli_query($conn,$query);
+			
 
-            if(mysqli_fetch_assoc($result))
+            if($row = mysqli_fetch_assoc($result))
             {
+				$manager = $row['isManager'];
+				
+				if($manager == 1) {
+					
                 $_SESSION['User']=$_POST['Employee_ID'];
-                header("location:main.php");
+                header("location:490managerhome.php");
+				}
+				else if ($manager == 0) {
+					$_SESSION['User']=$_POST['Employee_ID'];
+                header("location:490employeehome.php");
+				}
+					
             }
             else
             {
@@ -25,7 +36,7 @@ session_start();
     }
     else
     {
-        echo 'Failure it major proportions';
+        echo 'Failure in major proportions';
     }
 
 ?>
