@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-<title>Manager Home Page</title>
+<title>Employee Home Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,7 @@
             <!--adds the logo to the page-->
             <img src="WJJC-logo.png" class="float-right">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">Welcome "ManID"</h1>
+            <h1 class="display-2">Welcome "EmpID"</h1>
         </div>
     </div>
 
@@ -80,6 +80,11 @@
                     </nav>
                 </div>
             </div><!--end of sidebar-->
+
+            <!--clock in/out area-->
+            <div class="col-8">
+                <button type="button" class="btn btn-primary btn-lg" align="middle">Clock</button>
+            </div>
 
         </div><!--end of row-->
     </div><!--end of container-->

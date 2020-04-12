@@ -25,7 +25,7 @@
             <!--adds the logo to the page-->
             <img src="WJJC-logo.png" class="float-right">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">Welcome "ManID"</h1>
+            <h1 class="display-2">"EmpID" Account</h1>
         </div>
     </div>
 
