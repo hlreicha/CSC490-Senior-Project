@@ -1,12 +1,11 @@
 <?php
-session_start();
-if(isset($_SESSION['User'])) {
-  echo "Your session is running " . $_SESSION['User'];
-}
-else
-	{
-	header("location:../login/index.php");
-	}
+  session_start(); 
+  $username = $_SESSION['User']; 
+  //echo "The session is ". $_SESSION['manager'];
+  if($_SESSION['manager'] == 0) {
+	  header("location:490employeehome.php");
+  }
+  
 ?>
 <html lang="en">
 <head>
@@ -71,7 +70,7 @@ else
                         <ul class="collapse list-unstyled" id="manSchedule">
                             <li>
                                 <!--link to schedule page-->
-                                <a href="#">View Schedule</a><!--add link to page-->
+                                <a href="../view_schedule/490viewschedule.php">View Schedule</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to request time off page-->

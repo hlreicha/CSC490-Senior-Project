@@ -15,16 +15,16 @@ session_start();
 
             if($row = mysqli_fetch_assoc($result))
             {
-				$manager = $row['isManager'];
+				$_SESSION['manager'] = $row['isManager'];
 				
-				if($manager == 1) {
-					
+				if($_SESSION['manager'] == 1) {
                 $_SESSION['User']=$_POST['Employee_ID'];
+				
                 header("location:490managerhome.php");
 				}
-				else if ($manager == 0) {
+				else if ($_SESSION['manager'] == 0) {
 					$_SESSION['User']=$_POST['Employee_ID'];
-                header("location:490employeehome.php");
+					header("location:490employeehome.php");
 				}
 					
             }

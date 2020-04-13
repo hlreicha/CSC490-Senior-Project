@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <?php
-  session_start(); // must be before any output
-  $username = $_SESSION['User']; // or whatever you called it
-  // check that $username is valid here (safe to display)
+  session_start(); 
+  $username = $_SESSION['User']; 
+  //echo "The session is ". $_SESSION['manager'];
+  if($_SESSION['manager'] == 0) {
+	  header("location:490employeehome.php");
+  }
+  
 ?>
 <html lang="en">
 <head>
@@ -57,7 +61,7 @@
                         <ul class="collapse list-unstyled" id="manSchedule">
                             <li>
                                 <!--link to schedule page-->
-                                <a href="#">View Schedule</a><!--add link to page-->
+                                <a href="../view_schedule/490viewschedule.php">View Schedule</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to request time off page-->

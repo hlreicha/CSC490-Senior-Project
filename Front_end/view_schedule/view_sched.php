@@ -4,6 +4,17 @@ $username = "hlreicha";
 $password = "Moscow34!!";
 $dbname = "Test";
 
+
+session_start();
+if(isset($_SESSION['User'])) {
+  //echo "Your session is running " . $_SESSION['User'];
+  $empID = $_SESSION['User'];
+}
+else
+	{
+	header("location:../login/index.php");
+	}
+
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -15,21 +26,55 @@ if (!$conn) {
 $schedid = getSchedID();
 //echo "the schedid is: ". $schedid;
 
-$empID = 0;
+//main
+
 $sql = "SELECT Start_Time, End_Time, Position FROM `schedule` WHERE SchedID = $schedid and Employee_ID = $empID";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
+	/*
+	echo statement creates table, makes header for table, and starts the table body
+	this allows for a static header but for body to be filled for entirety of schedule
+	*/
+	echo '
+		<table class="table table-dark table-striped">
+			<thead>Schedule for Employee '.$empID. '</thead>
+				<thead>
+					<tr>
+						<th>Start</th>
+						<th>End</th>
+						<th>Position</th>
+					</tr>
+				</thead>
+				<tbody>
+		';
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
 		$Start = $row["Start_Time"];
 		$End = $row["End_Time"];
 		$Start = Time1($Start);
 		$End = Time1($End);
-		echo "Start time: " . $Start. " End Time: " . $End. " Position " . $row["Position"]. "<br>";
-	}
+		/*
+		echo statement allows for repetitive adding to table body to display entirety of week's schedule
+		*/
+		echo '					
+				<tr>
+					<td>'.$Start.'</td>
+					<td>'.$End.'</td>
+					<td>'.$row['Position'].'</td>
+				</tr>';						
+	} //end while
+	/*
+	echo statement closes both table body and table itself
+	*/
+	echo '
+		</tbody>
+		</table>
+		';
 } else {
 	echo " 0 results";
 }
+
+//fucntions
 function Time1(Int $Time){
 	//Converts timestamp to human date and declare timezone
 	$Time = "@".$Time;
@@ -92,11 +137,4 @@ function getSchedID() {
     }
 
 }
-
-
-	
-
-
-
-
-	?>
+?>

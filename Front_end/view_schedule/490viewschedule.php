@@ -1,17 +1,21 @@
+<html lang="en">
 <?php
-  session_start(); 
-  $username = $_SESSION['User']; 
-  //echo "The session is ". $_SESSION['manager'];
-  if($_SESSION['manager'] == 1) {
-	  header("location:490managerhome.php");
-  }
-  
+session_start();
+if(isset($_SESSION['User'])) {
+  //echo "Your session is running " . $_SESSION['User'];
+  $empID = $_SESSION['User'];
+}
+else
+	{
+	header("location:../login/index.php");
+	}
 ?>
 
 
-<html lang="en">
+
+
 <head>
-<title>Employee Home Page</title>
+<title>Schedule Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +39,7 @@
             <!--adds the logo to the page-->
             <img src="..\WJJC-logo.png" class="float-right">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">Welcome "EmpID"</h1>
+            <h1 class="display-2">Schedule</h1>
         </div>
     </div>
 
@@ -55,46 +59,55 @@
                         <li class="active">
                         <li>
                             <!--link to home page-->
-                            <a href="490employeehome.php">Home</a>
+                            <a href="..\login\490employeehome.php">Home</a>
                         </li>
                         <li>
                             <!--drops to display account options for employee-->
-                            <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
-                            <ul class="collapse list-unstyled" id="manAccount">
+                            <a href="#empAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
+                            <ul class="collapse list-unstyled" id="empAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="490employeechangepassword.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
                         <!--drops to display schedule options for employee-->
-                        <a href="#manSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
-                        <ul class="collapse list-unstyled" id="manSchedule">
+                        <a href="#empSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
+                        <ul class="collapse list-unstyled" id="empSchedule">
                             <li>
                                 <!--link to schedule page-->
-                                <a href="../view_schedule/490viewschedule.php">View Schedule</a><!--add link to page-->
+                                <a href="490employeeviewschedule.php">View Schedule</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to request time off page-->
-                                <a href="#">Request Time Off</a><!--add link to page-->
-                            </li> 
+                                <a href="490employeetimeoff.php">Request Time Off</a><!--add link to page-->
+                            </li>
                         </ul>
                         </li>
                         <li>
                             <!--link to instruction page for managers-->
-                            <a href="490managerinstructions.php">Instructions</a><!--add link to page-->
+                            <a href="490employeeinstructions.php">Instructions</a><!--add link to page-->
                         </li>
                         <li>
-                            <a href="logout.php?logout">Log Out</a><!--log out link-->
-                        </li>
+                            <a href="../login/logout.php?logout">Log Out</a><!--log out link-->
                         </li>
                     </ul>
                     </nav>
                 </div>
-            </div>
+            </div><!--end of sidebar-->
 
-            <!--This is where form starts-->
-        </div>
-    </div>
+			<div class="col-6"><!--start of table-->
+				<?php      
+					include ("view_sched.php");
+					
+					echo '<table class="table table-dark table-striped">
+							
+							</table>'
+				?>
+</div>
+
+			</div><!--end of table-->
+        </div><!--end of row-->
+    </div><!--end of container-->
 </body>
 </html>
