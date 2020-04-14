@@ -15,7 +15,7 @@ else
 ?>
 <html lang="en">
 <head>
-<title>View Worked Page</title>
+<title>Edit Schedule</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +39,7 @@ else
             <!--adds the logo to the page-->
             <img src="WJJC-logo.png" class="float-right">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">"ManID" Inventory</h1>
+            <h1 class="display-2">Edit Schedule</h1>
         </div>
     </div>
 
@@ -76,11 +76,11 @@ else
                         <ul class="collapse list-unstyled" id="manSchedule">
                             <li>
                                 <!--link to schedule page-->
-                                <a href="../view_schedule/490viewschedule.php">View Schedule</a><!--add link to page-->
+                                <a href="../view_schedule/490managerviewschedule.php">View Schedule</a><!--add link to page-->
                             </li>
                             <li>
                                 <!--link to request time off page-->
-                                <a href="#">Request Time Off</a><!--add link to page-->
+                                <a href="../view_schedule/490managertimeoff.php">Request Time Off</a><!--add link to page-->
                             </li>
 							<li>
                             <!--link to worked page for managers-->
@@ -97,7 +97,7 @@ else
                         </ul>
                         <li>
                             <!--link to inventory page for managers-->
-                            <a href="490managerinventory.php">Check Inventory</a><!--add link to page-->
+                            <a href="../View_inventory/490managerinventory.php">Check Inventory</a><!--add link to page-->
                         </li>
                         </li>
                         <li>
@@ -117,25 +117,24 @@ else
 		   <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h3 align="center">Worked Schedule</h3>  
-                <br /><br />  
-                <br /><br />
-                <label>Worked ID</label>  
-                <input type="text" name="WorkedID" id="WorkedID" readonly class="form-control" />  
-                <br /> 				
+                <br /><br />  				
                 <label>Employee ID</label>  
                 <input type="text" name="Employee_ID" id="Employee_ID"  class="form-control" />  
                 <br /> 				
                 <label>Schedule ID</label>  
                 <input type="text" name="SchedID" id="SchedID" readonly class="form-control" />  
                 <br />  
-                <label>Recorded Start</label>  
-                <input type="datetime-local" name="Recorded_Start" id="Recorded_Start" class="form-control"  />  
+                <label>Scheduled Start</label>  
+                <input type="datetime-local" name="Scheduled_Start" id="Scheduled_Start" class="form-control"  />  
                 <br /><br />
-                <label>Recorded End</label>  
-                <input type="datetime-local" name="Recorded_End" id="Recorded_End" class="form-control" />  
-                <br /><br /> 				
+                <label>Scheduled End</label>  
+                <input type="datetime-local" name="Scheduled_End" id="Scheduled_End" class="form-control" />  	
+				<br /><br />
+                <label>Position</label>  
+                <input type="text" name="Position" id="Position" class="form-control" />  
+                <br /><br /> 
                 <div align="center">  
-                     <input type="hidden" name="id" id= "WorkedID1" />  
+                     <input type="hidden" name="id" id= "id" />  
                      <button type="button" name="action" id="action" class="btn btn-warning">Add</button>  
                 </div>  
                 <br />  
@@ -170,12 +169,9 @@ else
 					 $('#WorkedID').val(''); 
                      $('#Employee_ID').val('');  
                      $('#SchedID').val(''); 
-					 $('#Recorded_Start').val('');
-					 $('#Recorded_End').val(''); 
-                     $('#Hours Worked').val('');  
-                     $('#isLate').val(''); 
-					 $('#isSched').val('');
-					 $('#leftEarly').val('');					 
+					 $('#Scheduled_Start').val('');
+					 $('#Scheduled_End').val(''); 
+                     $('#Position').val('');  					 
                      $('#action').text("Add");  
                      $('#result').html(data); 
 					//alert(data);
@@ -185,19 +181,21 @@ else
       $('#action').click(function(){  
 		   var Employee_ID = $('#Employee_ID').val();
            var SchedID = $('#SchedID').val();  
-           var Recorded_Start = $('#Recorded_Start').val(); 
-           var Recorded_End = $('#Recorded_End').val(); 		   
-           var id = $('#WorkedID').val(); 
-		   //document.write(Recorded_Start);
+           var Scheduled_Start = $('#Scheduled_Start').val(); 
+           var Scheduled_End = $('#Scheduled_End').val(); 
+		   var Position = $('#Position').val(); 
+           //var id = $(this).attr("id");
+		   var id = $('#id').val(); 
+		   //document.write(Scheduled_Start);
 		   //document.write(id);
            var action = $('#action').text();  
-           if(Recorded_Start != '' && Recorded_End != '')  
+           if(Scheduled_Start != '' && Scheduled_End != '')  
            {  
 				//document.write(action);
                 $.ajax({  
                      url : "action.php",  
                      method:"POST",  
-                     data:{Employee_ID : Employee_ID, SchedID : SchedID, Recorded_Start : Recorded_Start, Recorded_End : Recorded_End, id:id, action:action},  
+                     data:{Employee_ID : Employee_ID, SchedID : SchedID, Scheduled_Start : Scheduled_Start, Scheduled_End : Scheduled_End, Position : Position, id:id, action:action},  
                      success:function(data){  
                           alert(data);  
                           fetchUser();  
@@ -223,15 +221,16 @@ else
 					 $('#WorkedID').val(data.WorkedID);
 					 $('#Employee_ID').val(data.Employee_ID);
                      $('#SchedID').val(data.SchedID);  
-                     $('#Recorded_Start').val(data.Recorded_Start); 
-                     $('#Recorded_End').val(data.Recorded_End);	
+                     $('#Scheduled_Start').val(data.Scheduled_Start); 
+                     $('#Scheduled_End').val(data.Scheduled_End);
+					 $('#Position').val(data.Position);					 
 					 //alert(data);
                 }  
            })  
       });  
       $(document).on('click', '.delete', function(){  
            var id = $(this).attr("id"); 
-			//document.write(id);
+			document.write(id);
            if(confirm("Are you sure you want to remove this data?"))  
            {  
                 var action = "Delete";  

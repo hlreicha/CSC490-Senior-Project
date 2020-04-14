@@ -1,24 +1,30 @@
-<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<!--this allows the webpage to be the length and zoom of device being used-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!--other classes for database communication-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">  
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--this is the information taken from getbootstrap.com-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
 
 
 </head>
 <body>
-<h2>Click</h2>
-<form action="" method="POST">
-    <button name="click" class="click">Click me!</button>
-</form>
-
-
-
-
+	<form action="" method="POST"><!--begin form to input time-->
+		<button name="click" type="click" class="btn btn-primary btn-lg btn-block">Clock In</button><!--primary button to clock in/out-->
+	</form>
 </body>
 </html>
-
  
 
 <?php 
@@ -301,8 +307,8 @@ function check($date_clicked){
 				
 				//check to see if you are late
 				$test = ($date_clicked - $schedTime);
-				echo " The sched time is: " . $schedTime . "<br>";
-				echo "The date clicked is: " . $date_clicked . "<br>";
+				//echo " The sched time is: " . $schedTime . "<br>";
+				//echo "The date clicked is: " . $date_clicked . "<br>";
 		
 	
 				if( $test >= 60){
@@ -311,7 +317,7 @@ function check($date_clicked){
 				}
 				insertToWorked($empID,$schedID,$dayCode,$date_clicked,0,0,$isLate,$isScheduled,$leftEarly,$clockedIN);
 				
-				echo "the day code is: " . $dayCode;
+				//echo "the day code is: " . $dayCode;
 				
 				
 			//}
@@ -397,6 +403,7 @@ if(isset($_POST['click']))
 }
 
 
+//header("location:login/490employeehome.php");
 
 
 

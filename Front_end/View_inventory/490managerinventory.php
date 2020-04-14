@@ -1,10 +1,17 @@
 <?php
   session_start(); 
-  $username = $_SESSION['User']; 
-  //echo "The session is ". $_SESSION['manager'];
-  if($_SESSION['manager'] == 0) {
-	  header("location:490employeehome.php");
+  if(isset($_SESSION['User'])) {
+  //echo "Your session is running " . $_SESSION['User'];
+  $empID = $_SESSION['User'];
+  
+    if($_SESSION['manager'] == 0) {
+	  header("location:../login/490employeehome.php");
   }
+}
+else
+	{
+	header("location:../login/index.php");
+	}
   
 ?>
 <html lang="en">
@@ -81,6 +88,10 @@
                             <a href="../view_worked/490managerworked.php">View Hours Worked</a><!--add link to page-->
                             </li>
                             <li>
+                            <!--link to worked page for managers-->
+                            <a href="../alter_schedule/490editschedule.php">Edit Schedule</a><!--add link to page-->
+                            </li>
+							<li>
                                 <!--link to create schedule-->
                                 <a href="#">Create Schedule</a><!--add link to page-->
                             </li>
