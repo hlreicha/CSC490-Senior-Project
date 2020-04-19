@@ -12,10 +12,11 @@ else
 	{
 	header("location:../login/index.php");
 	}
+  
 ?>
 <html lang="en">
 <head>
-<title>Edit Schedule</title>
+<title>Managee Employee Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,10 +51,10 @@ body {
             <!--adds the logo to the page-->
             <img src="../WJJC-logo.png" class="float-left">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-1 text-success font-weight-bold">Edit Schedule</h1>
+            <h1 class="display-1 text-success font-weight-bold">Inventory</h1>
         </div>
     </div>
-
+	
     <div class="container-fluid">
         <div class="row">
 
@@ -75,6 +76,10 @@ body {
                             <!--drops to display account options for manager-->
                             <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
                             <ul class="collapse list-unstyled" id="manAccount">
+							                                <li>
+                                <!--link to change password page-->
+                                <a href="../view_employee/490manageremployee.php">Edit Employee</a> <!--add link to page-->
+                                </li>
                                 <li>
                                 <!--link to change password page-->
                                 <a href="#">Change Password</a> <!--add link to page-->
@@ -121,141 +126,137 @@ body {
 
             <!--This is where form starts-->
 			<div class="container">  
-		   <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color:white">
-                <h3 align="center">Worked Schedule</h3>  
-                <br /><br />  				
-                <label>Employee ID</label>  
-                <input type="text" name="Employee_ID" id="Employee_ID"  class="form-control" />  
-                <br /> 				
-                <label>Schedule ID</label>  
-                <input type="text" name="SchedID" id="SchedID" readonly class="form-control" />  
-                <br />  
-                <label>Scheduled Start</label>  
-                <input type="datetime-local" name="Scheduled_Start" id="Scheduled_Start" class="form-control"  />  
-                <br /><br />
-                <label>Scheduled End</label>  
-                <input type="datetime-local" name="Scheduled_End" id="Scheduled_End" class="form-control" />  	
-				<br /><br />
-                <label>Position</label>  
-                <input type="text" name="Position" id="Position" class="form-control" />  
-                <br /><br /> 
-                <div align="center">  
-                     <input type="hidden" name="id" id= "id" />  
-                     <button type="button" name="action" id="action" class="btn btn-warning">Add</button>  
-                </div>  
-                <br />  
-                <br />  
-                <div id="result" class="table-responsive">  
-                </div> 
-              </div>
-</div>				
-           </div> 
+				<div class="row">
+					<div class="col-10" style="background-color:white">
+						<h3 align="center">Managee Employee Page</h3>  
+						<br /><br />  
+						<br /><br />  
+						<label>Employee ID</label>  
+		
+						<input type="text" name="Employee_ID" id="Employee_ID" class="form-control" />  
+						<br /> 				
+						<label>	First Name</label>  
+						<input type="text" name="First_Name" id="First_Name" class="form-control" />  
+						<br />  
+						<label>Last Name</label>  
+						<input type="text" name="Last_Name" id="Last_Name" class="form-control" />  
+						<br /><br />
+						<label>Manager</label>  
+						<input type="text" name="isManager" id="isManager" class="form-control" />  
+						<br /><br />
+						<label>Password</label> 
+						<h5> Please note this field is only for inserting employees. New employees have to reset their password after they login for the first time </h5>
+						<input type="password" name="Password" id="Password" class="form-control" />  
+						<br /><br /> 						
+						<div align="center">  
+						<input type="hidden" name="id" id= "id" />  
+						<button type="button" name="action" id="action" class="btn btn-warning">Add</button>  
+						</div>  
+						<br />  
+						<br />  
+						<div id="result" class="table-responsive">  
+						</div> 
+					</div>
+				</div>				
+			</div>  
+        </div>
+    </div>
+</body>
 
+</html>
 
-
-
-
-
-
-
-	
-      </body>  
- </html>  
  <script>  
- $(document).ready(function(){  
-      fetchUser();  
-      function fetchUser()  
-      {  
-           var action = "select";  
-           $.ajax({  
-                url : "select.php",  
-                method:"POST",  
-                data:{action:action},  
-                success:function(data){ 
-					 $('#WorkedID').val(''); 
-                     $('#Employee_ID').val('');  
-                     $('#SchedID').val(''); 
-					 $('#Scheduled_Start').val('');
-					 $('#Scheduled_End').val(''); 
-                     $('#Position').val('');  					 
-                     $('#action').text("Add");  
-                     $('#result').html(data); 
-					//alert(data);
-                }  
-           });  
-      }  
-      $('#action').click(function(){  
-		   var Employee_ID = $('#Employee_ID').val();
-           var SchedID = $('#SchedID').val();  
-           var Scheduled_Start = $('#Scheduled_Start').val(); 
-           var Scheduled_End = $('#Scheduled_End').val(); 
-		   var Position = $('#Position').val(); 
-           //var id = $(this).attr("id");
-		   var id = $('#id').val(); 
-		   //document.write(Scheduled_Start);
-		   //document.write(id);
-           var action = $('#action').text();  
-           if(Scheduled_Start != '' && Scheduled_End != '')  
-           {  
-				//document.write(action);
-                $.ajax({  
-                     url : "action.php",  
-                     method:"POST",  
-                     data:{Employee_ID : Employee_ID, SchedID : SchedID, Scheduled_Start : Scheduled_Start, Scheduled_End : Scheduled_End, Position : Position, id:id, action:action},  
-                     success:function(data){  
-                          alert(data);  
-                          fetchUser();  
-                     }  
-                });  
-           }  
-           else  
-           {  
-                alert("Both Fields are Required");  
-           }  
-      });  
-      $(document).on('click', '.update', function(){  
-           var id = $(this).attr("id"); 
-			//document.write(id);
-           $.ajax({  
-                url:"fetch.php",  
-                method:"POST",  
-                data:{id:id},  
-                dataType:"json",  
-                success:function(data){  
-                     $('#action').text("Edit");  
-                     $('#id').val(id);
-					 $('#WorkedID').val(data.WorkedID);
-					 $('#Employee_ID').val(data.Employee_ID);
-                     $('#SchedID').val(data.SchedID);  
-                     $('#Scheduled_Start').val(data.Scheduled_Start); 
-                     $('#Scheduled_End').val(data.Scheduled_End);
-					 $('#Position').val(data.Position);					 
-					 //alert(data);
-                }  
-           })  
-      });  
-      $(document).on('click', '.delete', function(){  
-           var id = $(this).attr("id"); 
-			document.write(id);
-           if(confirm("Are you sure you want to remove this data?"))  
-           {  
-                var action = "Delete";  
-                $.ajax({  
-                     url:"action.php",  
-                     method:"POST",  
-                     data:{id:id, action:action},  
-                     success:function(data)  
-                     {  
-                          fetchUser();  
-                          alert(data);  
-                     }  
-                })  
-           }  
-           else  
-           {  
-                return false;  
-           }  
-      });  
- });  
- </script>  
+$(document).ready(function(){  
+
+    fetchUser();
+	
+    function fetchUser(){  
+		var action = "select";  
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{action:action},
+            success:function(data){ 
+				$('#Employee_ID').val(''); 
+                $('#First_Name').val('');  
+                $('#Last_Name').val(''); 
+				$('#isManager').val('');
+				$('#Password').val('');
+                $('#action').text("Add");  
+                $('#result').html(data);  
+            }  
+        });  
+    }
+	
+	$('#action').click(function(){
+		var id = $('#id').val(); 
+		//document.write(id);
+		var Employee_ID = $('#Employee_ID').val();
+		var First_Name = $('#First_Name').val();  
+		var Last_Name = $('#Last_Name').val(); 
+		var isManager = $('#isManager').val();
+		var Password = $('#Password').val();
+		 
+		var action = $('#action').text();  
+		//document.write(Employee_ID);
+			if(Employee_ID != '' && First_Name != '' && Last_Name != '' && isManager != ''){ 
+				$.ajax({  
+					url : "action.php",  
+					method:"POST",  
+					data:{Employee_ID : Employee_ID ,First_Name:First_Name, Last_Name:Last_Name, isManager : isManager,Password : Password, id:id, action:action},  
+					success:function(data){  
+						alert(data);  
+						fetchUser();  
+					}  
+				});  
+				}  
+			else{    
+				alert("All Fields are Required");  
+				}  
+		});
+	  
+	$(document).on('click', '.update', function(){  
+    
+		var id = $(this).attr("id");
+    
+		$.ajax({  
+			url:"fetch.php",  
+			method:"POST",  
+			data:{id:id},  
+			dataType:"json",  
+			success:function(data){
+				$('#action').text("Edit");  
+				$('#id').val(id);  
+				$('#Employee_ID').val("Employee ID cannot be changed.");
+				$('#First_Name').val(data.First_Name);  
+				$('#Last_Name').val(data.Last_Name); 
+				$('#isManager').val(data.isManager);
+				//$('#Password').val("Password cannot be changed here");
+			}  
+		})  
+	});  
+      
+	$(document).on('click', '.delete', function(){  
+
+		var id = $(this).attr("id"); 
+
+		if(confirm("Are you sure you want to remove this data?")){
+                
+			var action = "Delete";  
+        
+			$.ajax({  
+				url:"action.php",  
+				method:"POST",  
+				data:{id:id, action:action},  
+				success:function(data){ 
+					fetchUser();  
+					alert(data);  
+				}  
+			})  
+		}
+		else{  
+			return false;  
+		} 
+	});  
+});  
+</script>

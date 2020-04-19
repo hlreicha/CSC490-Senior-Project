@@ -36,22 +36,29 @@ else
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
+<style>
+.jumbotron {
+    background-image: url("../cupbackground.jpg");
+    background-size: cover;
+}
+</style>
+
 </head>
 
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <!--adds the logo to the page-->
-            <img src="../WJJC-logo.png" class="float-right">
+            <img src="../WJJC-logo.png" class="float-left">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">"EmpID" Time Off</h1>
+            <h1 class="display-1 text-success font-weight-bold">Time Off</h1>
         </div>
     </div>
 
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-2"><!--beginning of sidebar menu-->
+            <div class="col-2"><!--start of side menu-->
                 <!--builds structure for sidebar menu-->
                  <div class="wrapper">
                     <!--defines set of navigation links-->
@@ -71,7 +78,7 @@ else
                             <ul class="collapse list-unstyled" id="empAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="490employeechangepassword.php">Change Password</a> <!--add link to page-->
+                                <a href="#">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -85,21 +92,22 @@ else
                             <li>
                                 <!--link to request time off page-->
                                 <a href="../view_schedule/490employeetimeoff.php">Request Time Off</a><!--add link to page-->
-                            </li>
+                            </li> 
                         </ul>
                         </li>
                         <li>
                             <!--link to instruction page for managers-->
-                            <a href="490employeeinstructions.php">Instructions</a><!--add link to page-->
+                            <a href="#">Instructions</a><!--add link to page-->
                         </li>
                         <li>
                             <a href="../login/logout.php?logout">Log Out</a><!--log out link-->
                         </li>
+                        </li>
                     </ul>
                     </nav>
                 </div>
-            </div><!--end of sidebar-->
-
+            </div><!--end of side menu-->
+			
 			<div class="col-6"><!--begin request off area-->
 				<form action="request.php" method="POST"><!--begin form for clocking in/out-->
 					<label for="request off">Request Day Off:</label><!--use of dialogue boxes-->

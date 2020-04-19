@@ -38,6 +38,10 @@ else
     background-image: url("../cupbackground.jpg");
     background-size: cover;
 }
+
+body {
+	background-image: url("../coffee-beans-.jpg");
+}
 </style>
 
 </head>
@@ -46,9 +50,9 @@ else
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <!--adds the logo to the page-->
-            <img src="../WJJC-logo.png" class="float-right">
+            <img src="../WJJC-logo.png" class="float-left">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2 text-success font-weight-bold">Welcome</h1>
+            <h1 class="display-1 text-success font-weight-bold">Welcome</h1>
         </div>
     </div>
 
@@ -57,7 +61,8 @@ else
 
             <div class="col-2"><!--start of side menu-->
                 <!--builds structure for sidebar menu-->
-                 <div class="wrapper">
+			
+                <div class="wrapper border border-primary">
                     <!--defines set of navigation links-->
                     <nav id="sidebar">
                         <div class="sidebar-header">
@@ -71,8 +76,8 @@ else
                         </li>
                         <li>
                             <!--drops to display account options for employee-->
-                            <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
-                            <ul class="collapse list-unstyled" id="manAccount">
+                            <a href="#empAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
+                            <ul class="collapse list-unstyled" id="empAccount">
                                 <li>
                                 <!--link to change password page-->
                                 <a href="#">Change Password</a> <!--add link to page-->
@@ -80,8 +85,8 @@ else
                             </ul>
                         </li>
                         <!--drops to display schedule options for employee-->
-                        <a href="#manSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
-                        <ul class="collapse list-unstyled" id="manSchedule">
+                        <a href="#empSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
+                        <ul class="collapse list-unstyled" id="empSchedule">
                             <li>
                                 <!--link to schedule page-->
                                 <a href="../view_schedule/490employeeviewschedule.php">View Schedule</a><!--add link to page-->
@@ -97,12 +102,12 @@ else
                             <a href="#">Instructions</a><!--add link to page-->
                         </li>
                         <li>
-                            <a href="logout.php?logout">Log Out</a><!--log out link-->
+                            <a href="../login/logout.php?logout">Log Out</a><!--log out link-->
                         </li>
                         </li>
                     </ul>
-                    </nav>
-                </div>
+                    </nav>	
+                </div>				
             </div><!--end of side menu-->
 			
 			<div class="col-8"><!--start of clock in area-->

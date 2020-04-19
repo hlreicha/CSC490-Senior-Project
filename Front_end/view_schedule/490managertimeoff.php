@@ -36,24 +36,35 @@ else
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
+<style>
+.jumbotron {
+    background-image: url("../cupbackground.jpg");
+    background-size: cover;
+}
+
+body {
+	background-image: url("../coffee-beans-.jpg");
+}
+</style>
+
 </head>
 
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <!--adds the logo to the page-->
-            <img src="../WJJC-logo.png" class="float-right">
+            <img src="../WJJC-logo.png" class="float-left">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">Time Off</h1>
+            <h1 class="display-1 text-success font-weight-bold">Time Off</h1>
         </div>
     </div>
-
+	
     <div class="container-fluid">
         <div class="row">
 
-<div class="col-2"><!--start of side menu-->
+            <div class="col-2"><!--start of side menu-->
                 <!--builds structure for sidebar menu-->
-                 <div class="wrapper">
+                 <div class="wrapper border border-dark">
                     <!--defines set of navigation links-->
                     <nav id="sidebar">
                         <div class="sidebar-header">
@@ -66,16 +77,20 @@ else
                             <a href="../login/490managerhome.php">Home</a>
                         </li>
                         <li>
-                            <!--drops to display account options for employee-->
+                            <!--drops to display account options for manager-->
                             <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
                             <ul class="collapse list-unstyled" id="manAccount">
-                                <li>
+                               	<li>
+                                <!--link to change password page-->
+                                <a href="../view_employee/490manageremployee.php">Edit Employee</a> <!--add link to page-->
+                                </li>
+								<li>
                                 <!--link to change password page-->
                                 <a href="#">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
-                        <!--drops to display schedule options for employee-->
+                        <!--drops to display schedule options for manager-->
                         <a href="#manSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
                         <ul class="collapse list-unstyled" id="manSchedule">
                             <li>
@@ -90,13 +105,9 @@ else
                             <!--link to worked page for managers-->
                             <a href="../view_worked/490managerworked.php">View Hours Worked</a><!--add link to page-->
                             </li>
-							<li>
-                            <!--link to worked page for managers-->
-                            <a href="../alter_schedule/490editschedule.php">Edit Schedule</a><!--add link to page-->
-                            </li>
                             <li>
                                 <!--link to create schedule-->
-                                <a href="#">Create Schedule</a><!--add link to page-->
+                                <a href="../alter_schedule/490editschedule.php">Edit Schedule</a><!--add link to page-->
                             </li>
                         </ul>
                         <li>
@@ -106,7 +117,7 @@ else
                         </li>
                         <li>
                             <!--link to instruction page for managers-->
-                            <a href="490managerinstructions.php">Instructions</a><!--add link to page-->
+                            <a href="#">Instructions</a><!--add link to page-->
                         </li>
                         <li>
                             <a href="../login/logout.php?logout">Log Out</a><!--log out link-->
