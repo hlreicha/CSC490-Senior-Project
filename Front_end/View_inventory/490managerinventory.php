@@ -82,7 +82,7 @@ body {
                                 </li>
 								<li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -130,9 +130,14 @@ body {
 					<div class="col-10" style="background-color:white">
 						<h3 align="center">Inventory</h3>  
 						<br /><br />  
-						<br /><br />  
-						<label>InventoryID</label>  
-						<input type="text" name="InventoryID" id="InventoryID" readonly class="form-control" />  
+						<br /><br />
+						<label>Search by Product ID</label> 
+                        <input class="form-control" type="text" placeholder="By Product ID" aria-label="Search" id="ProductID1" name="ProductID1">
+                        <button class="button" name="search" id="search" class="btn btn-warning" >Search</button>
+						<button class="button" name="reset" id="reset" class="btn btn-warning" >Reset</button>
+                        <br /><br /> 
+						<br /><br /> 
+	
 						<br /> 				
 						<label>Product ID</label>  
 						<input type="text" name="ProductID" id="ProductID" class="form-control" />  
@@ -144,7 +149,7 @@ body {
 						<input type="text" name="Quantity" id="Quantity" class="form-control" />  
 						<br /><br />  				
 						<div align="center">  
-						<input type="hidden" name="id" id= "InventoryID" />  
+						<input type="hidden" name="id" id= "id" />  
 						<button type="button" name="action" id="action" class="btn btn-warning">Add</button>  
 						</div>  
 						<br />  
@@ -246,6 +251,45 @@ $(document).ready(function(){
 		else{  
 			return false;  
 		} 
-	});  
+	});
+	$('#search').click(function(){
+		var search = $('#search').text();
+		var ProductID1 = $('#ProductID1').val(); 
+        //document.write(ProductID1);
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{search : search , ProductID1 : ProductID1},
+            success:function(data){ 
+				$('#InventoryID').val(''); 
+                $('#ProductID').val('');  
+                $('#Name').val(''); 
+				$('#Quantity').val('');					 
+                $('#action').text("Add");  
+                $('#result').html(data); 
+		        //alert(data);
+					}  
+				})  
+		});
+$('#reset').click(function(){
+		var reset = $('#reset').text();
+		var ProductID1 = $('#ProductID1').val(); 
+       
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{reset : reset , ProductID1 : ProductID1},
+            success:function(data){ 
+				$('#InventoryID').val(''); 
+                $('#ProductID').val('');  
+                $('#Name').val(''); 
+				$('#Quantity').val('');					 
+                $('#action').text("Add");  
+                $('#result').html(data); 
+		        //alert(data);
+					}  
+				})  
+		});
+	
 });  
 </script>

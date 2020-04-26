@@ -1,11 +1,36 @@
 <?php  
  //select.php  
+ 
+ function connection() {
  $output = '';  
     $servername = "localhost";
 	$username = "hlreicha";
 	$password = "Moscow34!!";
 	$dbname = "Test";
 	$connect = mysqli_connect($servername, $username, $password, $dbname);
+	return $connect;
+}
+
+	$output = ''; 
+	$connect = connection();
+    if(isset($_POST["search"])) {
+		search($connect,$output);
+	}
+	if(isset($_POST["action"]))  
+   {
+	    select($connect,$output);
+   }
+   
+	if(isset($_POST["reset"]))  
+   {
+	    select($connect,$output);
+   }
+
+
+
+
+
+
 function getSchedID() {
     date_default_timezone_set('America/New_York');
 	//echo date_default_timezone_get (  );
@@ -63,13 +88,13 @@ function convertBool(int $i) {
 	}
 }
 	
-	
- if(isset($_POST["action"]))  
- {  
+function select($connect,$output) {	
+// if(isset($_POST["action"]))  
+ //{  
       $procedure = "  
       CREATE PROCEDURE selectUser(IN id int(11))  
       BEGIN  
-      SELECT * FROM worked where SchedID = id;  
+      SELECT * FROM worked where SchedID = id ORDER BY Employee_ID;  
       END;  
       "; 
 		//echo "fuck";
@@ -89,7 +114,7 @@ function convertBool(int $i) {
                 $output .= '  
                      <table class="table table-bordered">  
                           <tr>  
-							   <th width="15%">Worked ID</th> 
+							   
 						       <th width="15%">Employee ID</th> 
                                <th width="15%">Schedule ID</th>  
                                <th width="15%">Recorded Start</th> 
@@ -118,7 +143,7 @@ function convertBool(int $i) {
 						
                           $output .= '  
                                <tr>  
-									<td>'.$row["WorkedID"].'</td> 
+									
 							        <td>'.$row["Employee_ID"].'</td> 
                                     <td>'.$SchedID.'</td>  
                                     <td>'.$Start.'</td>
@@ -140,7 +165,7 @@ function convertBool(int $i) {
                 {  
                      $output .= '  
                           <tr>  
-                               <td colspan="11">Data not Found</td>  
+                               <td colspan="10">Data not Found</td>  
                           </tr>  
                      ';  
                 }  
@@ -148,5 +173,85 @@ function convertBool(int $i) {
                 echo $output;  
            }  
       }  
- }  
+ //}
+ return 0;
+}
+function search($connect,$output) {
+//if(isset($_POST["search"]))  
+// {  
+      $SchedID = getSchedID();
+	  //echo "sched id is:" . $SchedID;
+      $Employee_ID = mysqli_real_escape_string($connect, $_POST["Employee_ID1"]); 
+      $procedure = "  
+      CREATE PROCEDURE searchUser(id int(11), schID int(11))  
+      BEGIN  
+      SELECT * FROM `worked` WHERE `Employee_ID` = id and `SchedID` = schID;  
+      END;  
+      ";  
+      if(mysqli_query($connect, "DROP PROCEDURE IF EXISTS searchUser"))  
+      {  
+           if(mysqli_query($connect, $procedure))  
+           {  
+				
+				
+			
+                $query = "CALL searchUser('".$Employee_ID."', '".$SchedID."')";  
+                $result = mysqli_query($connect, $query)or die(mysqli_error($connect));  
+                $output .= '  
+                     <table class="table table-bordered">  
+                          <tr>  
+							   
+						       <th width="15%">Employee ID</th> 
+                               <th width="15%">Schedule ID</th>  
+                               <th width="15%">Recorded Start</th> 
+							   <th width="15%">Recorded End</th>
+						       <th width="8%">Hours Worked</th> 
+                               <th width="8%">isLate</th> 
+							   <th width="8%">isSched</th> 
+							   <th width="8%">leftEarly</th>							   
+                               <th width="8%">Update</th> 
+							   <th width="8%">Delete</th> 
+                          </tr>  
+                ';  
+                if(mysqli_num_rows($result) > 0)  
+                {  
+                     while($row = mysqli_fetch_array($result))  
+                     {  
+				        $Start = date('m/d/Y h:i A', $row["Recorded_Start"]);
+						$End = date('m/d/Y h:i A', $row["Recorded_End"]);
+						$Late = convertBool($row["isLate"]);
+						$Sched = convertBool($row["isSched"]);
+						$Left = convertBool($row["leftEarly"]);
+                          $output .= '  
+                               <tr>  
+									
+							        <td>'.$row["Employee_ID"].'</td> 
+                                    <td>'.$row['SchedID'].'</td>  
+                                    <td>'.$Start.'</td>
+                                    <td>'.$End.'</td> 
+							        <td>'.gmdate("H:i:s", $row["Hours Worked"]).'</td> 
+                                    <td>'.$Late.'</td>  
+                                    <td>'.$Sched.'</td> 
+                                    <td>'.$Left.'</td> 									
+                                    <td><button type="button" name="update" id="'.$row["WorkedID"].'" class="update btn btn-success btn-xs">Update</button></td> 
+									<td><button type="button" name="delete" id="'.$row["WorkedID"].'" class="delete btn btn-danger btn-xs">Delete</button></td> 
+                               </tr>  
+                          ';  
+                     }  
+                }  
+                else  
+                {  
+						$output .= '  
+                          <tr>  
+                               <td colspan="10">Data not Found</td>  
+                          </tr>  
+                     ';  
+                }  
+                $output .= '</table>';  
+                echo $output;  
+           }  
+      }  
+ //}
+return 0;
+}  
  ?>  

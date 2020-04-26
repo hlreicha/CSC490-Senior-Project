@@ -16,38 +16,47 @@
 <!--this is the information taken from getbootstrap.com-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<style>
+.jumbotron {
+    background-image: url("../cupbackground.jpg");
+    background-size: cover;
+}
+
+body {
+	background-image: url("../coffee-beans-.jpg");
+}
+</style>
+
 </head>
 <body>
- 
- 
-    <div class="jumbotron jumbotron-fluid"><!--jubotron top-->
+    <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-1">Log In</h1>
+            <!--adds the logo to the page-->
+            <img src="../WJJC-logo.png" class="float-left">
+            <!--at some point, have display appropriate employee id-->
+            <h1 class="display-1 text-success font-weight-bold">Log In</h1>
         </div>
     </div>
  
-					<!--php function to see if inputs are empty-->
-                    <?php 
-                        if(@$_GET['Empty']==true)
-                        {
-                    ?>
-						<!--between php to display text-->
-                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Empty'] ?></div>                                
-                    <?php
-                        }
-                    ?>
- 
- 
-                    <?php 
-                        if(@$_GET['Invalid']==true)
-                        {
-                    ?>
-						<!--between php to display text-->
-                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Invalid'] ?></div>                                
-                    <?php
-                        }
-                    ?>
- 
+<!--php function to see if inputs are empty-->
+<?php 
+    if(@$_GET['Empty']==true)
+    {
+?>
+<!--between php to display text-->
+    <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Empty'] ?></div>                                
+<?php
+    }
+?>
+<?php 
+    if(@$_GET['Invalid']==true)
+    {
+?>
+<!--between php to display text-->
+    <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Invalid'] ?></div>                                
+<?php
+    }
+?>
  
 	<div class="container"><!--this is the container for the username and password form-->
         

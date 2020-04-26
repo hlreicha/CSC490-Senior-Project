@@ -80,7 +80,7 @@ body {
                             <ul class="collapse list-unstyled" id="empAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>

@@ -75,9 +75,13 @@ body {
                             <!--drops to display account options for manager-->
                             <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
                             <ul class="collapse list-unstyled" id="manAccount">
+							    <li>
+                                <!--link to change password page-->
+                                <a href="../view_employee/490manageremployee.php">Edit Employee</a> <!--add link to page-->
+                                </li>
                                 <li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -123,13 +127,17 @@ body {
 			<div class="container">  
 		   <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color:white">
-                <h3 align="center">Worked Schedule</h3>  
-                <br /><br />  				
+                <h3 align="center">Edit Schedule</h3>  
+                <br /><br /> 
+                <label>Search by Employee ID</label> 
+                <input class="form-control" type="text" placeholder="By Employee ID" aria-label="Search" id="Employee_ID1" name="Employee_ID1">
+                <button class="button" name="search" id="search" class="btn btn-warning" >Search</button>
+				<button class="button" name="reset" id="reset" class="btn btn-warning" >Reset</button>
+                <br /><br /> 
+				<br /><br /> 				
                 <label>Employee ID</label>  
-                <input type="text" name="Employee_ID" id="Employee_ID"  class="form-control" />  
-                <br /> 				
-                <label>Schedule ID</label>  
-                <input type="text" name="SchedID" id="SchedID" readonly class="form-control" />  
+                <input type="text" name="Employee_ID" id="Employee_ID"  class="form-control" />  				 
+                <input type="hidden" name="SchedID" id="SchedID" readonly class="form-control" />  
                 <br />  
                 <label>Scheduled Start</label>  
                 <input type="datetime-local" name="Scheduled_Start" id="Scheduled_Start" class="form-control"  />  
@@ -256,6 +264,51 @@ body {
            {  
                 return false;  
            }  
-      });  
+      });
+	  	$('#search').click(function(){
+		var search = $('#search').text();
+		var Employee_ID1 = $('#Employee_ID1').val(); 
+        //document.write(Employee_ID1)
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{search : search , Employee_ID1 : Employee_ID1},
+            success:function(data){ 
+					 $('#WorkedID').val(''); 
+                     $('#Employee_ID').val('');  
+                     $('#SchedID').val(''); 
+					 $('#Scheduled_Start').val('');
+					 $('#Scheduled_End').val(''); 
+                     $('#Position').val('');  					 
+                     $('#action').text("Add");  
+                     $('#result').html(data);  
+		             //alert(data);
+					}  
+				})  
+		});
+		$('#reset').click(function(){
+		var reset = $('#reset').text();
+		var Employee_ID1 = $('#Employee_ID1').val(); 
+        //document.write(Employee_ID1)
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{reset : reset , Employee_ID1 : Employee_ID1},
+            success:function(data){ 
+					 $('#WorkedID').val(''); 
+                     $('#Employee_ID').val('');  
+                     $('#SchedID').val(''); 
+					 $('#Scheduled_Start').val('');
+					 $('#Scheduled_End').val(''); 
+                     $('#Position').val('');  					 
+                     $('#action').text("Add");  
+                     $('#result').html(data);  
+		             //alert(data);
+					}  
+				}) 
+			$('#Employee_ID1').val(''); 
+		});
+
+	  
  });  
  </script>  

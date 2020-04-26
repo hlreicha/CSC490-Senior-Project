@@ -31,10 +31,11 @@
            }  
       }  
       if($_POST["action"] == "Edit")  
-      {    $id= mysqli_real_escape_string($connect, $_POST["id"]); 
+      {    $InventoryID = mysqli_real_escape_string($connect, $_POST["InventoryID"]); 
 		   $ProductID = mysqli_real_escape_string($connect, $_POST["ProductID"]); 
            $Quantity = mysqli_real_escape_string($connect, $_POST["Quantity"]);  
-           $Name = mysqli_real_escape_string($connect, $_POST["Name"]);  
+           $Name = mysqli_real_escape_string($connect, $_POST["Name"]); 
+		   $id = mysqli_real_escape_string($connect, $_POST["id"]);		   
            $procedure = "  
                 CREATE PROCEDURE updateUser(id int(11), ProductID int(11), Quantity int(11), Name char(25))  
                 BEGIN   

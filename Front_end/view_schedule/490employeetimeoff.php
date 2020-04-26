@@ -41,6 +41,10 @@ else
     background-image: url("../cupbackground.jpg");
     background-size: cover;
 }
+
+body {
+	background-image: url("../coffee-beans-.jpg");
+}
 </style>
 
 </head>
@@ -60,7 +64,7 @@ else
 
             <div class="col-2"><!--start of side menu-->
                 <!--builds structure for sidebar menu-->
-                 <div class="wrapper">
+                 <div class="wrapper border border-primary">
                     <!--defines set of navigation links-->
                     <nav id="sidebar">
                         <div class="sidebar-header">
@@ -78,7 +82,7 @@ else
                             <ul class="collapse list-unstyled" id="empAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>

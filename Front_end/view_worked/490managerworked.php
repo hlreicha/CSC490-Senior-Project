@@ -81,7 +81,7 @@ body {
                                 </li>
 								<li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -128,16 +128,18 @@ body {
 		   <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color:white">
                 <h3 align="center">Worked Schedule</h3>  
-                <br /><br />  
+                <br /><br /> 
+				<label>Search by Employee ID</label> 
+                <input class="form-control" type="text" placeholder="By Employee ID" aria-label="Search" id="Employee_ID1" name="Employee_ID1">
+                <button class="button" name="search" id="search" class="btn btn-warning" >Search</button>
+				<button class="button" name="reset" id="reset" class="btn btn-warning" >Reset</button> 
                 <br /><br />
-                <label>Worked ID</label>  
-                <input type="text" name="WorkedID" id="WorkedID" readonly class="form-control" />  
+                <input type="hidden" name="WorkedID" id="WorkedID" readonly class="form-control" />  
                 <br /> 				
                 <label>Employee ID</label>  
                 <input type="text" name="Employee_ID" id="Employee_ID"  class="form-control" />  
-                <br /> 				
-                <label>Schedule ID</label>  
-                <input type="text" name="SchedID" id="SchedID" readonly class="form-control" />  
+                <br /> 				 
+                <input type="hidden" name="SchedID" id="SchedID" readonly class="form-control" />  
                 <br />  
                 <label>Recorded Start</label>  
                 <input type="datetime-local" name="Recorded_Start" id="Recorded_Start" class="form-control"  />  
@@ -262,5 +264,57 @@ body {
                 return false;  
            }  
       });  
+	  
+	  
+	  	$('#search').click(function(){
+		var search = $('#search').text();
+		var Employee_ID1 = $('#Employee_ID1').val(); 
+        //document.write(Employee_ID1)
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{search : search , Employee_ID1 : Employee_ID1},
+            success:function(data){ 
+					 $('#WorkedID').val(''); 
+                     $('#Employee_ID').val('');  
+                     $('#SchedID').val(''); 
+					 $('#Recorded_Start').val('');
+					 $('#Recorded_End').val(''); 
+                     $('#Hours Worked').val('');  
+                     $('#isLate').val(''); 
+					 $('#isSched').val('');
+					 $('#leftEarly').val('');					 
+                     $('#action').text("Add");  
+                     $('#result').html(data); 
+		             //alert(data);
+					}  
+				})  
+		});
+		$('#reset').click(function(){
+		var reset = $('#reset').text();
+		var Employee_ID1 = $('#Employee_ID1').val(); 
+        //document.write(Employee_ID1)
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{reset : reset , Employee_ID1 : Employee_ID1},
+            success:function(data){ 
+					 $('#WorkedID').val(''); 
+                     $('#Employee_ID').val('');  
+                     $('#SchedID').val(''); 
+					 $('#Recorded_Start').val('');
+					 $('#Recorded_End').val(''); 
+                     $('#Hours Worked').val('');  
+                     $('#isLate').val(''); 
+					 $('#isSched').val('');
+					 $('#leftEarly').val('');					 
+                     $('#action').text("Add");  
+                     $('#result').html(data); 
+		             //alert(data);
+					}
+				
+				})  
+		   $('#Employee_ID1').val('');
+		});	
  });  
  </script>  

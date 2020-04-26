@@ -76,13 +76,13 @@ body {
                             <!--drops to display account options for manager-->
                             <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
                             <ul class="collapse list-unstyled" id="manAccount">
-							                                <li>
+							    <li>
                                 <!--link to change password page-->
                                 <a href="../view_employee/490manageremployee.php">Edit Employee</a> <!--add link to page-->
                                 </li>
                                 <li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -131,8 +131,12 @@ body {
 						<h3 align="center">Managee Employee Page</h3>  
 						<br /><br />  
 						<br /><br />  
+						<label>Search by Employee ID</label> 
+						<input class="form-control" type="text" placeholder="By Employee ID" aria-label="Search" id="Employee_ID1" name="Employee_ID1">
+						<button class="button" name="search" id="search" class="btn btn-warning" >Search</button>
+						<button class="button" name="reset" id="reset" class="btn btn-warning" >Reset</button>
+						<br /><br /> 
 						<label>Employee ID</label>  
-		
 						<input type="text" name="Employee_ID" id="Employee_ID" class="form-control" />  
 						<br /> 				
 						<label>	First Name</label>  
@@ -141,8 +145,10 @@ body {
 						<label>Last Name</label>  
 						<input type="text" name="Last_Name" id="Last_Name" class="form-control" />  
 						<br /><br />
-						<label>Manager</label>  
-						<input type="text" name="isManager" id="isManager" class="form-control" />  
+						<label>Manager</label>
+						<br /><br />						
+						<label><input type="radio" name="boolean" value="True">True</label> 
+                        <label><input type="radio" name="boolean" value="False">False</label> 
 						<br /><br />
 						<label>Password</label> 
 						<h5> Please note this field is only for inserting employees. New employees have to reset their password after they login for the first time </h5>
@@ -194,7 +200,7 @@ $(document).ready(function(){
 		var Employee_ID = $('#Employee_ID').val();
 		var First_Name = $('#First_Name').val();  
 		var Last_Name = $('#Last_Name').val(); 
-		var isManager = $('#isManager').val();
+		var isManager = $("input[name='boolean']:checked").val();;
 		var Password = $('#Password').val();
 		 
 		var action = $('#action').text();  
@@ -230,7 +236,7 @@ $(document).ready(function(){
 				$('#Employee_ID').val("Employee ID cannot be changed.");
 				$('#First_Name').val(data.First_Name);  
 				$('#Last_Name').val(data.Last_Name); 
-				$('#isManager').val(data.isManager);
+				$('#boolean').val(data.isManager);
 				//$('#Password').val("Password cannot be changed here");
 			}  
 		})  
@@ -239,6 +245,7 @@ $(document).ready(function(){
 	$(document).on('click', '.delete', function(){  
 
 		var id = $(this).attr("id"); 
+		var empID = '<?php echo $empID; ?>';
 
 		if(confirm("Are you sure you want to remove this data?")){
                 
@@ -247,7 +254,7 @@ $(document).ready(function(){
 			$.ajax({  
 				url:"action.php",  
 				method:"POST",  
-				data:{id:id, action:action},  
+				data:{id:id, action:action, empID : empID},  
 				success:function(data){ 
 					fetchUser();  
 					alert(data);  
@@ -257,6 +264,49 @@ $(document).ready(function(){
 		else{  
 			return false;  
 		} 
-	});  
+	});
+	 $('#search').click(function(){
+		var search = $('#search').text();
+		var Employee_ID1 = $('#Employee_ID1').val(); 
+        //document.write(Employee_ID1)
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{search : search , Employee_ID1 : Employee_ID1},
+            success:function(data){ 
+				$('#Employee_ID').val(''); 
+                $('#First_Name').val('');  
+                $('#Last_Name').val(''); 
+				$('#isManager').val('');
+				$('#Password').val('');
+                $('#action').text("Add");  
+                $('#result').html(data);  
+		        //alert(data);
+					}  
+				})  
+		});
+	$('#reset').click(function(){
+		var reset = $('#reset').text();
+		var Employee_ID1 = $('#Employee_ID1').val(); 
+        //document.write(Employee_ID1)
+        $.ajax({  
+            url : "select.php",  
+            method:"POST",  
+            data:{reset : reset , Employee_ID1 : Employee_ID1},
+            success:function(data){ 
+				$('#Employee_ID').val(''); 
+                $('#First_Name').val('');  
+                $('#Last_Name').val(''); 
+				$('#isManager').val('');
+				$('#Password').val('');
+                $('#action').text("Add");  
+                $('#result').html(data);  
+		        //alert(data);
+					}  
+				})  
+			$('#Employee_ID1').val('');
+		});
+
+	
 });  
 </script>

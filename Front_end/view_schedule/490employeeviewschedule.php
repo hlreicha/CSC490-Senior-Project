@@ -1,13 +1,9 @@
 <html lang="en">
 <?php
-  session_start(); 
-  if(isset($_SESSION['User'])) {
+session_start();
+if(isset($_SESSION['User'])) {
   //echo "Your session is running " . $_SESSION['User'];
   $empID = $_SESSION['User'];
-  
-    if($_SESSION['manager'] == 1) {
-	  header("location:../login/490manager.php");
-  }
 }
 else
 	{
@@ -35,25 +31,34 @@ else
 <!--this is the information taken from getbootstrap.com-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<style>
+.jumbotron {
+    background-image: url("../cupbackground.jpg");
+    background-size: cover;
+}
+
+body {
+	background-image: url("../coffee-beans-.jpg");
+}
+</style>
 </head>
 
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <!--adds the logo to the page-->
-            <img src="..\WJJC-logo.png" class="float-right">
+            <img src="../WJJC-logo.png" class="float-left">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-2">Schedule</h1>
+            <h1 class="display-1 text-success font-weight-bold">View Schedule</h1>
         </div>
     </div>
 
     <div class="container-fluid">
         <div class="row">
 
+            <div class="col-2"><!--start of side menu-->
                 <!--builds structure for sidebar menu-->
-            <div class="col-2">
-                <!--builds structure for sidebar menu-->
-                 <div class="wrapper">
+                 <div class="wrapper border border-primary">
                     <!--defines set of navigation links-->
                     <nav id="sidebar">
                         <div class="sidebar-header">
@@ -63,7 +68,7 @@ else
                         <li class="active">
                         <li>
                             <!--link to home page-->
-                            <a href="..\login\490employeehome.php">Home</a>
+                            <a href="490employeehome.php">Home</a>
                         </li>
                         <li>
                             <!--drops to display account options for employee-->
@@ -71,7 +76,7 @@ else
                             <ul class="collapse list-unstyled" id="empAccount">
                                 <li>
                                 <!--link to change password page-->
-                                <a href="490employeechangepassword.php">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>
@@ -85,20 +90,21 @@ else
                             <li>
                                 <!--link to request time off page-->
                                 <a href="../view_schedule/490employeetimeoff.php">Request Time Off</a><!--add link to page-->
-                            </li>
+                            </li> 
                         </ul>
                         </li>
                         <li>
                             <!--link to instruction page for managers-->
-                            <a href="490employeeinstructions.php">Instructions</a><!--add link to page-->
+                            <a href="#">Instructions</a><!--add link to page-->
                         </li>
                         <li>
                             <a href="../login/logout.php?logout">Log Out</a><!--log out link-->
                         </li>
+                        </li>
                     </ul>
                     </nav>
                 </div>
-            </div><!--end of sidebar-->
+            </div><!--end of side menu-->
 
 			<div class="col-6"><!--start of table-->
 				<?php      

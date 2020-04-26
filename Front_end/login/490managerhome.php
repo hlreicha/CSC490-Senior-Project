@@ -1,12 +1,18 @@
 <?php
   session_start(); 
   if(isset($_SESSION['User'])) {
-  //echo "Your session is running " . $_SESSION['User'];
+  //echo "Your session is running " . $_SESSION['pw'];
   $empID = $_SESSION['User'];
   
     if($_SESSION['manager'] == 0) {
 	  header("location:../login/490employeehome.php");
   }
+  
+  	else if($_SESSION['pw'] == 1){
+	 $_SESSION['User']=$_POST['Employee_ID'];
+	header("location:../change_password/change_password.php");	
+				}
+  
 }
 else
 	{
@@ -83,7 +89,7 @@ body {
                                 </li>
 								<li>
                                 <!--link to change password page-->
-                                <a href="#">Change Password</a> <!--add link to page-->
+                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
                                 </li>
                             </ul>
                         </li>

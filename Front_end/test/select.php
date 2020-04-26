@@ -30,7 +30,7 @@ function select($connect,$output) {
       $procedure = "  
       CREATE PROCEDURE selectUser()  
       BEGIN  
-      SELECT * FROM inventory ORDER BY ProductID;  
+      SELECT * FROM inventory ORDER BY InventoryID DESC;  
       END;  
       ";  
       if(mysqli_query($connect, "DROP PROCEDURE IF EXISTS selectUser"))  
@@ -130,11 +130,13 @@ function search($connect,$output) {
                 else  
                 {  
 					                  
-                     $output .= '  
-                          <tr>  
-                               <td colspan="5">Data not Found</td>  
-                          </tr>  
-                     ';
+				echo "Data not found for: " .$ProductID;
+				echo '<script>alert("Data not found in the database")</script>'; 
+				$output1 = '';
+				$connect2 = connection();
+				$check = true;
+				select($connect2,$output1);
+				return  0;
 					
                 }  
                 $output .= '</table>';  
@@ -145,4 +147,4 @@ function search($connect,$output) {
  //}
 return 0;
 } 
- ?>     
+ ?>  

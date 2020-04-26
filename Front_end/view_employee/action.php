@@ -1,5 +1,20 @@
  <?php  
  //action.php  
+
+ function convertValToBool($value) {
+	 if($value == "True") {
+		 $value = 1;
+		 return $value;
+	 }
+	 else if ($value == "False") {
+		 $value = 0;
+		 return $value;
+	 }
+ }
+	 
+
+ 
+ 
  if(isset($_POST["action"]))  
  {  
       $output = '';  
@@ -17,6 +32,7 @@
            $isManager = mysqli_real_escape_string($connect, $_POST["isManager"]);
 		   $Password = mysqli_real_escape_string($connect, $_POST["Password"]);
 		   $changePW = 1;
+		   $isManager = convertValToBool($isManager);
            $procedure = "  
                 CREATE PROCEDURE insertUser(Employee_ID int(11), First_Name varchar(12), Last_Name varchar(25), Password varchar(15), isManager tinyint(1), changePW tinyint(1) )  
                 BEGIN  
@@ -37,11 +53,12 @@
       }  
       if($_POST["action"] == "Edit")  
       {    
-           $id = $_POST["id"];
+           $id = mysqli_real_escape_string($connect, $_POST["id"]);
 		   $Employee_ID = mysqli_real_escape_string($connect, $_POST["Employee_ID"]); 
 		   $First_Name= mysqli_real_escape_string($connect, $_POST["First_Name"]); 
            $Last_Name = mysqli_real_escape_string($connect, $_POST["Last_Name"]);  
-           $isManager = mysqli_real_escape_string($connect, $_POST["isManager"]);  
+           $isManager = mysqli_real_escape_string($connect, $_POST["isManager"]); 
+           $isManager = convertValToBool($isManager);		   
 		   //echo "This emp id is: " . $Employee_ID;
            $procedure = "  
                 CREATE PROCEDURE updateUser(id int(11), First_Name varchar(12), Last_Name 	varchar(25), isManager tinyint(1))  
@@ -68,7 +85,9 @@
            BEGIN   
            DELETE FROM employee WHERE Employee_ID = id;  
            END;  
-           ";  
+           ";
+		$id = mysqli_real_escape_string($connect, $_POST["id"]);
+		if($_POST["empID"] != $id){
            if(mysqli_query($connect, "DROP PROCEDURE IF EXISTS deleteUser"))  
            {  
                 if(mysqli_query($connect, $procedure))  
@@ -80,6 +99,11 @@
                      echo 'Data Deleted';  
                 }  
            }  
-      }  
- }  
+      }
+		else{
+			echo "You cannot delete yourself";
+			
+	 }
+ } 
+ } 
  ?>  

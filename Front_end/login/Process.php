@@ -16,15 +16,21 @@ session_start();
             if($row = mysqli_fetch_assoc($result))
             {
 				$_SESSION['manager'] = $row['isManager'];
+				$_SESSION['pw'] = $row['changePW'];
 				
-				if($_SESSION['manager'] == 1) {
+				if($_SESSION['manager'] == 1 And $_SESSION['pw'] == 0) {
                 $_SESSION['User']=$_POST['Employee_ID'];
 				
                 header("location:490managerhome.php");
 				}
-				else if ($_SESSION['manager'] == 0) {
+				else if ($_SESSION['manager'] == 0 And $_SESSION['pw'] == 0) {
 					$_SESSION['User']=$_POST['Employee_ID'];
 					header("location:490employeehome.php");
+				}
+				else if($_SESSION['pw'] == 1){
+					$_SESSION['User']=$_POST['Employee_ID'];
+					header("location:../change_password/change_password.php");
+					
 				}
 					
             }
