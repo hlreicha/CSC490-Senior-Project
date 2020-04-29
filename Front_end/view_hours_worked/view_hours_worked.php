@@ -14,6 +14,17 @@ else
 	{
 	header("location:../login/index.php");
 	}
+	
+function convertBool(int $i) {
+	if ($i == 1) {
+		$i = "True";
+	return $i; 
+	}
+	elseif ($i == 0) {
+		$i = "False";
+		return $i;
+	}
+}
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -28,32 +39,40 @@ $schedid = getSchedID();
 
 //main
 
-$sql = "SELECT Start_Time, End_Time, Position FROM `schedule` WHERE SchedID = $schedid and Employee_ID = $empID";
+$sql = "SELECT * FROM `worked` WHERE SchedID = $schedid and Employee_ID = $empID";
 $result = $conn->query($sql);
+	/*
+	echo statement creates table, makes header for table, and starts the table body
+	this allows for a static header but for body to be filled for entirety of schedule
+	*/
 	echo '
 		<table class="table table-dark table-striped table-bordered">
 			<thead style="font-size: 20px">Employee : '.$empID. '</thead>
 				<thead>
 					<tr>
-						<th>Start</th>
-						<th>End</th>
-						<th>Position</th>
+						<th width="1%">Recorded Start</th>
+						<th width="1%">Recorded End</th>
+						<th width="1%">Hours Worked</th>
+						<th width="1%">Late</th>
+						<th width="1%">Scheduled</th>
+						<th width="1%">Left Early</th>
 					</tr>
 				</thead>
 				<tbody>
 		';
 if ($result->num_rows > 0) {
-	/*
-	echo statement creates table, makes header for table, and starts the table body
-	this allows for a static header but for body to be filled for entirety of schedule
-	*/
+
 
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
-		$Start = $row["Start_Time"];
-		$End = $row["End_Time"];
+		$Start = $row["Recorded_Start"];
+		$End = $row["Recorded_End"];
 		$Start = Time1($Start);
 		$End = Time1($End);
+		$hours_worked = gmdate("H:i:s", $row["Hours Worked"]);
+		$late = convertBool($row["isLate"]);
+		$isSched = convertBool($row["isSched"]);
+		$leftEarly = convertBool($row["leftEarly"]);
 		/*
 		echo statement allows for repetitive adding to table body to display entirety of week's schedule
 		*/
@@ -61,7 +80,10 @@ if ($result->num_rows > 0) {
 				<tr>
 					<td>'.$Start.'</td>
 					<td>'.$End.'</td>
-					<td>'.$row['Position'].'</td>
+					<td>'.$hours_worked.'</td>
+					<td>'.$late.'</td>
+					<td>'.$isSched.'</td>
+					<td>'.$leftEarly.'</td>
 				</tr>';						
 	} //end while
 	/*
@@ -72,8 +94,8 @@ if ($result->num_rows > 0) {
 		</table>
 		';
 } else {
-		echo   ' <tr>  
-             <td colspan="3">No Scheduled for the Week. Please Contact Your Manager.</td>  
+	echo   ' <tr>  
+             <td colspan="6">No Hours Recorded for this Week.</td>  
             </tr>
 			</tbody>
 			</table>' ;

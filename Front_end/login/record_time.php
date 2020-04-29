@@ -1,3 +1,6 @@
+
+
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -14,17 +17,45 @@
 
 <!--this is the information taken from getbootstrap.com-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style>
+.button {
+	font-size: 30px;
+	width: 80%;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	
+}
+
+.clock {
+	font-size: 40px;
+	width: 50%;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+}
+
+</style>
 </head>
 
 <body>
+	<div align="center bg-dark text-light">
+	<br />
 	<form action="" method="POST"><!--begin form to input time-->
-		<button name="click" type="click" class="btn btn-primary btn-lg btn-block">Clock In</button><!--primary button to clock in/out-->
-	</form><!--end form-->
+		<button name="click" type="click" class="button btn-primary rounded" >Punch Your Time In</button><!--primary button to clock in/out--> 
+    
+		  
+        
+	</form><!--end  form-->
+	</div>
 </body>
 </html>
- 
 
-<?php 
+
+
+
+
+<?php
+
 session_start();
 if(isset($_SESSION['User'])) {
   //echo "Your session is running " . $_SESSION['User'];
@@ -35,6 +66,27 @@ else
 	header("location:index.php");
 	}
 
+
+
+function button($empID,$schedID,$dayCode) {
+	$connect = connection();
+	 $query = "Select * from worked where SchedID = $schedID and Employee_ID = $empID and DayCode = $dayCode and isClockedIN = 1";
+	$result = mysqli_query($connect, $query)  or die(mysqli_error($connect));
+	$check = "Clocked out";
+
+	if ($result->num_rows > 0){
+		//echo "heyman";
+		$check = "Clocked in";
+		return $check;
+	}
+	else {
+		//echo "cbt?";
+		return $check;
+	}
+	
+}
+
+		
 
 
 function connection() {
@@ -222,7 +274,8 @@ function insertToWorked($empID,$schedID,$daycode,$recorded_start,$recorded_end,$
 	  $insertSQL =  "INSERT INTO worked (Employee_ID,SchedID, DayCode, Recorded_Start,Recorded_End,`Hours Worked`, isLate,isSched, leftEarly, isClockedIn) 
 	  VALUES ($empID,$schedID,$daycode,$recorded_start,$recorded_end,0,$isLate,$isSched, 0, $isClockedin)";
 	  if($conn->query($insertSQL) === TRUE) {
-		echo "Clocked In";
+		echo '<div class="clock">Clocked In</div>';
+		//$cbt =button($empID,$schedID,$daycode);
 		return 0;
 	} 
 	else {
@@ -239,7 +292,8 @@ function insertToWorked($empID,$schedID,$daycode,$recorded_start,$recorded_end,$
 		//updates recorded_end, leftEarly, isClockedIn, and Hours Worked columns in the table.
 		$updateSQL = "UPDATE `worked` SET `Recorded_End`= $recorded_end, `leftEarly` = $leftEarly, `isClockedIn`= $isClockedin, `Hours Worked` = $hoursWorked WHERE  `Employee_ID` = $empID and `SchedID` = $schedID and `DayCode` = $daycode and `isClockedIn` = 1";
 		if($conn->query($updateSQL) === TRUE) {
-		echo " Clocked Out";
+		echo '<div class="clock" >Clocked Out</div>';
+		//$cbt = button($empID,$schedID,$daycode);
 		return 0;
 	} 
 	else {

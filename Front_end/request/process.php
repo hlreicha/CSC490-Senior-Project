@@ -70,13 +70,13 @@ function is21DaysAdvance($requestDate){
 	$time_check =  $requestTimeStamp - $currentTimestamp;
 
 	//If condition to check if it 21 days
-	if($time_check < 1814400) {
+	if($time_check < 604800) {
 		$check = False;
-		echo "You cant request days off that is less then 21 days in advance";
+		echo "You cant request days off that is less then 7 days in advance";
 		return $check;
 	}
 	// 
-	elseif ($time_check >= 1814400) {
+	elseif ($time_check >= 604800) {
 		$check = insertRequest($requestTimeStamp);
 		return $check;
 		//echo "Request Submitted ". $requestDate ."  ";

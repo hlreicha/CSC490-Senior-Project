@@ -105,10 +105,10 @@ function select($connect,$output) {
                 $query = "CALL selectUser(".$SchedID.")";  
                 $result = mysqli_query($connect, $query) or die(mysqli_error($connect));  
                 $output .= '  
-                     <table class="table table-bordered">  
+                     <table class="table table-bordered" style="color: black"> 
                           <tr>  
 						       <th width="15%">Employee ID</th> 
-                               <th width="15%">Schedule ID</th>  
+                              
                                <th width="15%">Scheduled Start</th> 
 							   <th width="15%">Scheduled End</th>
 							   <th width="15%">Position</th>							   
@@ -131,7 +131,6 @@ function select($connect,$output) {
                           $output .= '  
                                <tr>   
 							        <td>'.$row["Employee_ID"].'</td> 
-                                    <td>'.$SchedID.'</td>  
                                     <td>'.$Start.'</td>
                                     <td>'.$End.'</td> 
                                     <td>'.$Position.'</td>  									
@@ -148,7 +147,7 @@ function select($connect,$output) {
                 {  
                      $output .= '  
                           <tr>  
-                               <td colspan="5">Data not Found</td>  
+                               <td colspan="4">Data not Found</td>  
                           </tr>  
                      ';  
                 }  
@@ -184,7 +183,7 @@ function search($connect,$output) {
                      <table class="table table-bordered">  
                           <tr>  
 						       <th width="15%">Employee ID</th> 
-                               <th width="15%">Schedule ID</th>  
+                                
                                <th width="15%">Scheduled Start</th> 
 							   <th width="15%">Scheduled End</th>
 							   <th width="15%">Position</th>							   
@@ -202,7 +201,7 @@ function search($connect,$output) {
                           $output .= '  
                                <tr>  
 									<td>'.$row["Employee_ID"].'</td> 
-                                    <td>'.$SchedID.'</td>  
+                                    
                                     <td>'.$Start.'</td>
                                     <td>'.$End.'</td> 
                                     <td>'.$Position.'</td>  									
@@ -216,7 +215,7 @@ function search($connect,$output) {
                 {  
                      $output .= '  
                           <tr>  
-                               <td colspan="5">Data not Found</td>  
+                               <td colspan="4">Data not Found</td>  
                           </tr>  
                      ';  
                 }  

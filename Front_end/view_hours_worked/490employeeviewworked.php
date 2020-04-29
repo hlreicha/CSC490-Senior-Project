@@ -1,18 +1,15 @@
 <?php
   session_start(); 
   if(isset($_SESSION['User'])) {
-  //echo "Your session is running " . $_SESSION['pw'];
+  //echo "Your session is running " . $_SESSION['User'];
   $empID = $_SESSION['User'];
   
-    if($_SESSION['manager'] == 0) {
-	  header("location:../login/490employeehome.php");
+    if($_SESSION['manager'] == 1) {
+	  header("location:../login/490managerhome.php");
   }
-  
-  	else if($_SESSION['pw'] == 1){
-	 $_SESSION['User']=$_POST['Employee_ID'];
+    else if($_SESSION['pw'] == 1){
 	header("location:../change_password/change_password.php");	
 				}
-  
 }
 else
 	{
@@ -20,14 +17,9 @@ else
 	}
 ?>
 
-
 <html lang="en">
-<!--Interface creation and general design by Matthew Malzahn
-	PHP functions and database management by Henry Reichard
--->
-<!--credit to navbar template https://bootsnipp.com/snippets/vlXGB-->
 <head>
-<title>Manager Home Page</title>
+<title>Employee View Schedule Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,7 +54,6 @@ body {
 	align-items: center;
 }
 </style>
-
 </head>
 
 <body>
@@ -74,7 +65,7 @@ body {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto topnav">
 				<li class="nav-item active">
-					<a class="nav-link" href="../login/490managerhome.php">Home<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="../login/490employeehome.php">Home<span class="sr-only">(current)</span></a>
 				</li>
 				
 				<li class="nav-item dropdown">
@@ -91,26 +82,14 @@ body {
 					Schedule
 					</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="../view_schedule/490managerviewschedule.php">View Schedule</a>
-							<a class="dropdown-item" href="../view_schedule/490managertimeoff.php">Request Time Off</a>
-							<a class="dropdown-item" href="../view_hours_worked/490managerviewworked.php">View Worked Hours</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="../view_worked/490managerworked.php">Edit Worked Hours</a>
-							<a class="dropdown-item" href="../alter_schedule/490editschedule.php">Edit Schedule</a>
-							
+							<a class="dropdown-item" href="../view_schedule/490employeeviewschedule.php">View Schedule</a>
+							<a class="dropdown-item" href="../view_schedule/490employeetimeoff.php">Request Time Off</a>
+							<a class="dropdown-item" href="../view_hours_worked/490employeeviewworked.php">View Hours Worked</a>
 						</div>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" href="../View_inventory/490managerinventory.php">Inventory</a>
-				</li>
-				
-				<li class="nav-item">
-					<a class="nav-link" href="../view_employee/490manageremployee.php">Add Employee</a>
-				</li>
-				
-				<li class="nav-item">
-					<a class="nav-link" href="../login/490managerinstructions.php">Instructions</a>
+					<a class="nav-link" href="../login/490employeeinstructions.php">Instructions</a>
 				</li>
                 
 				<li class="nav-item">
@@ -125,39 +104,35 @@ body {
             <!--adds the logo to the page-->
             <img src="../WJJC-logo.png" class="WJJC-logo">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="jumbomessage display-1 text-success font-weight-bold">Welcome</h1>
+            <h1 class="jumbomessage display-1 text-success font-weight-bold">View Schedule</h1>
         </div>
     </div>
 <!--end top of page-->
 
     <div class="container-fluid">
-        <div class="row">		
+        <div class="row">
+		
+			<div class="col-12"><!--start of table-->
+				<?php      
+					include ("view_hours_worked.php");
+					
+					echo '<table class="table table-dark table-striped">
+							
+							</table>'
+				?>
+			</div><!--end of table-->
 			
-			<div class="col-12 bg-dark text-light" align="center"><!--start of clock in area-->
-			<?php
-			/*
-			include functions from record_time.php
-			this also provides the button for clocking in/out within the record_time.php file
-			*/
-			include ("record_time.php");
-			?>
-			</div><!--end of clock in area-->
-			
-
         </div><!--end of row-->
     </div><!--end of container-->
-
-<script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
-</script>
-
+	
 <!--scripts-->
-<!--other classes for database communication-->  
+<!--other classes for database communication-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <!--this is for the navbar menu at top of page-->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+
 </body>
 </html>

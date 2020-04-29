@@ -17,24 +17,49 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <style>
+/*This is the background for the jumbotron*/
 .jumbotron {
-    background-image: url("../cupbackground.jpg");
+    background-image: url("../newcup.jpg");
     background-size: cover;
 }
 
+/*Style for WJJC logo*/
+.WJJC-logo {
+	vertical-align: justify;
+}
+
+/*Fixes background for site body*/
 body {
-	background-image: url("../coffee-beans-.jpg");
+	background: url("../coffee-beans-.jpg") no-repeat center center fixed;
+}
+
+/*message telling which page it is*/
+.jumbomessage {
+	text-align: justify;
+	 text-shadow: 2px 2px #000000;
+}
+
+/*aligns logo and text*/
+.box {
+	display: flex;
+	align-items: center;
+}
+
+form label {
+	
+	font-weight: bold;
+	font-size: 20px;
 }
 </style>
 
 </head>
 <body>
     <div class="jumbotron jumbotron-fluid">
-        <div class="container">
+        <div class="container box">
             <!--adds the logo to the page-->
-            <img src="../WJJC-logo.png" class="float-left">
+            <img src="../WJJC-logo.png" class="WJJC-logo">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-1 text-success font-weight-bold">Log In</h1>
+            <h1 class="jumbomessage display-1 text-success font-weight-bold">Log In</h1>
         </div>
     </div>
  
@@ -58,32 +83,37 @@ body {
     }
 ?>
  
-	<div class="container"><!--this is the container for the username and password form-->
+	<div class="container bg-dark text-light"><!--this is the container for the username and password form-->
         
         <form action="Process.php" method="post"><!--sends inputs to Process.php, in 'login' folder-->
         
 			<!--formatting for input box-->
 			<div class="form-group row">
+			<div class="col-3"></div>
 				<div class="col-6">
 			
 					<!--this box is for the user id-->
-					<label for="usr">Emplyoee ID:</label>
-					<input type="text" class="form-control input-lg" id="usr" name="Employee_ID">
+					<label for="usr">Employee ID:</label>
+					<input type="number" class="form-control input-lg" placeholder="Employee ID" id="usr" name="Employee_ID">
 				</div>
 			</div>
 			
 			<!--formatting for input box-->
 			<div class="form-group row">
+				<div class="col-3"></div>
 				<div class="col-6">
 				
 					<!--this box is for the password-->
 					<label for="pwd">Password:</label>
-					<input type="password" class="form-control input-lg" id="pwd" name="Password">
+					<input type="password" class="form-control input-lg" placeholder="Password" id="pwd" name="Password">
 				</div>
 			</div>
 			
 			<!--button to submit and check if credentials pass-->
+			<div align="center">
             <button class="btn btn-success mt-3" name="Login">Login</button>
+			</div>
+			<br />
         
         </form><!--end form-->
     </div><!--end container for inputs-->

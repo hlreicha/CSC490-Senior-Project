@@ -112,21 +112,22 @@ function select($connect,$output) {
                 $query = "CALL selectUser(".$SchedID.")";  
                 $result = mysqli_query($connect, $query) or die(mysqli_error($connect));  
                 $output .= '  
-                     <table class="table table-bordered">  
+					
+                      <table class="table table-bordered" style="color: black"> 
                           <tr>  
 							   
-						       <th width="15%">Employee ID</th> 
-                               <th width="15%">Schedule ID</th>  
+						       <th width="10%">Employee ID</th> 
                                <th width="15%">Recorded Start</th> 
 							   <th width="15%">Recorded End</th>
-						       <th width="8%">Hours Worked</th> 
-                               <th width="8%">isLate</th> 
-							   <th width="8%">isSched</th> 
-							   <th width="8%">leftEarly</th>							   
-                               <th width="8%">Update</th> 
-							   <th width="8%">Delete</th>
+						       <th width="10%">Hours Worked</th> 
+                               <th width="10%">isLate</th> 
+							   <th width="10%">isSched</th> 
+							   <th width="10%">leftEarly</th>							   
+                               <th width="10%">Update</th> 
+							   <th width="10%">Delete</th>
                               
                           </tr>  
+						  
                 ';  
                 if(mysqli_num_rows($result) > 0)
 						
@@ -145,7 +146,7 @@ function select($connect,$output) {
                                <tr>  
 									
 							        <td>'.$row["Employee_ID"].'</td> 
-                                    <td>'.$SchedID.'</td>  
+                                    
                                     <td>'.$Start.'</td>
                                     <td>'.$End.'</td> 
 							        <td>'.gmdate("H:i:s", $row["Hours Worked"]).'</td> 
@@ -165,7 +166,7 @@ function select($connect,$output) {
                 {  
                      $output .= '  
                           <tr>  
-                               <td colspan="10">Data not Found</td>  
+                               <td colspan="9">Data not Found</td>  
                           </tr>  
                      ';  
                 }  
@@ -201,16 +202,15 @@ function search($connect,$output) {
                      <table class="table table-bordered">  
                           <tr>  
 							   
-						       <th width="15%">Employee ID</th> 
-                               <th width="15%">Schedule ID</th>  
+						       <th width="10%">Employee ID</th> 
                                <th width="15%">Recorded Start</th> 
 							   <th width="15%">Recorded End</th>
-						       <th width="8%">Hours Worked</th> 
-                               <th width="8%">isLate</th> 
-							   <th width="8%">isSched</th> 
-							   <th width="8%">leftEarly</th>							   
-                               <th width="8%">Update</th> 
-							   <th width="8%">Delete</th> 
+						       <th width="10%">Hours Worked</th> 
+                               <th width="10%">isLate</th> 
+							   <th width="10%">isSched</th> 
+							   <th width="10%">leftEarly</th>							   
+                               <th width="10%">Update</th> 
+							   <th width="10%">Delete</th>
                           </tr>  
                 ';  
                 if(mysqli_num_rows($result) > 0)  
@@ -226,7 +226,7 @@ function search($connect,$output) {
                                <tr>  
 									
 							        <td>'.$row["Employee_ID"].'</td> 
-                                    <td>'.$row['SchedID'].'</td>  
+                     
                                     <td>'.$Start.'</td>
                                     <td>'.$End.'</td> 
 							        <td>'.gmdate("H:i:s", $row["Hours Worked"]).'</td> 
@@ -243,7 +243,7 @@ function search($connect,$output) {
                 {  
 						$output .= '  
                           <tr>  
-                               <td colspan="10">Data not Found</td>  
+                               <td colspan="9">Data not Found</td>  
                           </tr>  
                      ';  
                 }  
@@ -254,4 +254,4 @@ function search($connect,$output) {
  //}
 return 0;
 }  
- ?>  
+ ?>   

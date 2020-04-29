@@ -27,14 +27,19 @@ else
 -->
 <!--credit to navbar template https://bootsnipp.com/snippets/vlXGB-->
 <head>
-<title>Manager Home Page</title>
+<title>Manager Instructions Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--links-->
-<!--this is for navbar menu at top of page-->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--other classes for database communication-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">  
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 <!--this is the information taken from getbootstrap.com-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -125,39 +130,26 @@ body {
             <!--adds the logo to the page-->
             <img src="../WJJC-logo.png" class="WJJC-logo">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="jumbomessage display-1 text-success font-weight-bold">Welcome</h1>
+            <h1 class="jumbomessage display-1 text-success font-weight-bold">Instructions</h1>
         </div>
     </div>
 <!--end top of page-->
 
-    <div class="container-fluid">
-        <div class="row">		
-			
-			<div class="col-12 bg-dark text-light" align="center"><!--start of clock in area-->
-			<?php
-			/*
-			include functions from record_time.php
-			this also provides the button for clocking in/out within the record_time.php file
-			*/
-			include ("record_time.php");
-			?>
-			</div><!--end of clock in area-->
-			
+<div class="card text-white bg-dark">
+  <h5 class="card-header">Schedule</h5>
+  <div class="card-body">
+    <h5 class="card-title">Schedule</h5>
+    <p class="card-text">Make Schedule for Next Week</p>
+  </div>
+</div>
 
-        </div><!--end of row-->
-    </div><!--end of container-->
+<div class="card text-white bg-dark">
+  <h5 class="card-header">Inventory</h5>
+  <div class="card-body">
+    <h5 class="card-title">Inventory</h5>
+    <p class="card-text">Count Inventory and Input to System</p>
+  </div>
+</div>
 
-<script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
-</script>
-
-<!--scripts-->
-<!--other classes for database communication-->  
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<!--this is for the navbar menu at top of page-->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

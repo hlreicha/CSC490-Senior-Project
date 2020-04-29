@@ -57,7 +57,7 @@ function select($connect,$output) {
 						       <th width="20%">EmployeeID</th> 
                                <th width="20%">First Name</th>  
                                <th width="20%">Last Name</th>
-							   <th width="20%">isManager</th>  > 
+							   <th width="20%">isManager</th>   
                                <th width="20%">Update</th>  
                                <th width="20%">Delete</th>  
                           </tr>  
@@ -136,7 +136,7 @@ function search($connect,$output) {
                                     <td>'.$row["Last_Name"].'</td> 
                                     <td>'.convertBool($row["isManager"]).'</td> 									
                                     <td><button type="button" name="update" id="'.$row["Employee_ID"].'" class="update btn btn-success btn-xs">Update</button></td>  
-                                    <td><button type="button" name="delete" id="'.$row["Employee_ID"].'" class="delete btn btn-danger btn-xs">Delete</button></td>
+                                    <td><button type="button" name="delete" id="'.$row["Employee_ID"].'" class="delete btn btn-danger btn-xs">Fire</button></td>
                                </tr>  
                           ';  
                      }  

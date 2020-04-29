@@ -34,8 +34,8 @@ else
 <form action="request.php" method = POST>
 <label for="request off">Request Day Off:</label>
 <div>
-Start Date: <input id="startDate" name = "startDate" class="form-control" readonly />
-End Date: <input id="endDate" name = "endDate" class="form-control" readonly />	
+Start Date: <input id="startDate" name = "startDate" class="form-control" readonly type="date" />
+End Date: <input id="endDate" name = "endDate" class="form-control" readonly type="date"/>	
 <button type="button" name="action" id="action" class="btn btn-warning">Submit</button>
 </div>
 </form>

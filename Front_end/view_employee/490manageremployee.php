@@ -16,7 +16,7 @@ else
 ?>
 <html lang="en">
 <head>
-<title>Managee Employee Page</title>
+<title>Manager Employee Page</title>
 <meta charset="utf-8">
 <!--this allows the webpage to be the length and zoom of device being used-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,117 +33,131 @@ else
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <style>
+/*This is the background for the jumbotron*/
 .jumbotron {
-    background-image: url("../cupbackground.jpg");
+    background-image: url("../newcup.jpg");
     background-size: cover;
 }
 
+/*Fixes background for site body*/
 body {
-	background-image: url("../coffee-beans-.jpg");
+	background: url("../coffee-beans-.jpg") no-repeat center center fixed;
+}
+
+/*message telling which page it is*/
+.jumbomessage {
+	text-align: justify;
+	text-shadow: 2px 2px #000000;
+}
+
+/*aligns logo and text*/
+.box {
+	display: flex;
+	align-items: center;
+}
+
+td, th {
+	color: white
+}
+
+tr {
+	background-color: black
 }
 </style>
 
 </head>
 
 <body>
+<!--start top of page-->
+	<!--start of top navbar menu-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+	
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto topnav">
+				<li class="nav-item active">
+					<a class="nav-link" href="../login/490managerhome.php">Home<span class="sr-only">(current)</span></a>
+				</li>
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Account
+					</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="../change_password/change_password.php">Change Password</a>
+						</div>
+				</li>
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Schedule
+					</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="../view_schedule/490managerviewschedule.php">View Schedule</a>
+							<a class="dropdown-item" href="../view_schedule/490managertimeoff.php">Request Time Off</a>
+							<a class="dropdown-item" href="../view_hours_worked/490managerviewworked.php">View Worked Hours</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="../view_worked/490managerworked.php">Edit Worked Hours</a>
+							<a class="dropdown-item" href="../alter_schedule/490editschedule.php">Edit Schedule</a>
+							
+						</div>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="../View_inventory/490managerinventory.php">Inventory</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="../view_employee/490manageremployee.php">Add Employee</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="../login/490managerinstructions.php">Instructions</a>
+				</li>
+                
+				<li class="nav-item">
+					<a class="nav-link" href="../login/logout.php?logout">Log Out</a>
+				</li>
+			</ul>
+		</div>
+	</nav><!--end navbar-->
+
     <div class="jumbotron jumbotron-fluid">
-        <div class="container">
+        <div class="container box">
             <!--adds the logo to the page-->
-            <img src="../WJJC-logo.png" class="float-left">
+            <img src="../WJJC-logo.png" class="WJJC-logo">
             <!--at some point, have display appropriate employee id-->
-            <h1 class="display-1 text-success font-weight-bold">Inventory</h1>
+            <h1 class="jumbomessage display-1 text-success font-weight-bold">Edit Employee</h1>
         </div>
     </div>
+<!--end top of page-->
 	
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-2"><!--start of side menu-->
-                <!--builds structure for sidebar menu-->
-                 <div class="wrapper border border-dark">
-                    <!--defines set of navigation links-->
-                    <nav id="sidebar">
-                        <div class="sidebar-header">
-                        <h3>Manager Menu</h3>
-                        </div>
-                    <ul class="list-unstyled components">
-                        <li class="active">
-                        <li>
-                            <!--link to home page-->
-                            <a href="../login/490managerhome.php">Home</a>
-                        </li>
-                        <li>
-                            <!--drops to display account options for manager-->
-                            <a href="#manAccount" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account</a>
-                            <ul class="collapse list-unstyled" id="manAccount">
-							    <li>
-                                <!--link to change password page-->
-                                <a href="../view_employee/490manageremployee.php">Edit Employee</a> <!--add link to page-->
-                                </li>
-                                <li>
-                                <!--link to change password page-->
-                                <a href="../change_password/change_password.php">Change Password</a> <!--add link to page-->
-                                </li>
-                            </ul>
-                        </li>
-                        <!--drops to display schedule options for manager-->
-                        <a href="#manSchedule" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Schedule</a>
-                        <ul class="collapse list-unstyled" id="manSchedule">
-                            <li>
-                                <!--link to schedule page-->
-                                <a href="../view_schedule/490managerviewschedule.php">View Schedule</a><!--add link to page-->
-                            </li>
-                            <li>
-                                <!--link to request time off page-->
-                                <a href="../view_schedule/490managertimeoff.php">Request Time Off</a><!--add link to page-->
-                            </li>
-														<li>
-                            <!--link to worked page for managers-->
-                            <a href="../view_worked/490managerworked.php">View Hours Worked</a><!--add link to page-->
-                            </li>
-                            <li>
-                                <!--link to create schedule-->
-                                <a href="../alter_schedule/490editschedule.php">Edit Schedule</a><!--add link to page-->
-                            </li>
-                        </ul>
-                        <li>
-                            <!--link to inventory page for managers-->
-                            <a href="../View_inventory/490managerinventory.php">Check Inventory</a><!--add link to page-->
-                        </li>
-                        </li>
-                        <li>
-                            <!--link to instruction page for managers-->
-                            <a href="#">Instructions</a><!--add link to page-->
-                        </li>
-                        <li>
-                            <a href="../login/logout.php?logout">Log Out</a><!--log out link-->
-                        </li>
-                        </li>
-                    </ul>
-                    </nav>
-                </div>
-            </div><!--end of side menu-->
-
             <!--This is where form starts-->
 			<div class="container">  
 				<div class="row">
-					<div class="col-10" style="background-color:white">
-						<h3 align="center">Managee Employee Page</h3>  
-						<br /><br />  
-						<br /><br />  
+					<div class="col-12 bg-dark text-light" style="background-color:white">
+						<br />
 						<label>Search by Employee ID</label> 
-						<input class="form-control" type="text" placeholder="By Employee ID" aria-label="Search" id="Employee_ID1" name="Employee_ID1">
+						<br />
+						<input class="form-control" input type="number" type="text" placeholder="Employee ID" aria-label="Search" id="Employee_ID1" name="Employee_ID1">
+						<br />
 						<button class="button" name="search" id="search" class="btn btn-warning" >Search</button>
 						<button class="button" name="reset" id="reset" class="btn btn-warning" >Reset</button>
-						<br /><br /> 
+						</div>
+						</div>
+						<div class="row bg-dark text-light">
+						<div class="col-3">
 						<label>Employee ID</label>  
-						<input type="text" name="Employee_ID" id="Employee_ID" class="form-control" />  
+						<input type="number"  name="Employee_ID" id="Employee_ID" placeholder="Employee ID" class="form-control" />  
 						<br /> 				
 						<label>	First Name</label>  
-						<input type="text" name="First_Name" id="First_Name" class="form-control" />  
+						<input type="text" name="First_Name" id="First_Name" placeholder="First Name" class="form-control" />  
 						<br />  
 						<label>Last Name</label>  
-						<input type="text" name="Last_Name" id="Last_Name" class="form-control" />  
+						<input type="text" name="Last_Name" id="Last_Name" placeholder="Last Name" class="form-control" />  
 						<br /><br />
 						<label>Manager</label>
 						<br /><br />						
@@ -152,16 +166,18 @@ body {
 						<br /><br />
 						<label>Password</label> 
 						<h5> Please note this field is only for inserting employees. New employees have to reset their password after they login for the first time </h5>
-						<input type="password" name="Password" id="Password" class="form-control" />  
+						<input type="password" name="Password" id="Password" placeholder="Password" class="form-control" />  
 						<br /><br /> 						
 						<div align="center">  
 						<input type="hidden" name="id" id= "id" />  
 						<button type="button" name="action" id="action" class="btn btn-warning">Add</button>  
 						</div>  
-						<br />  
-						<br />  
+						</div>
+						<div class="col-9 bg-dark text-light">
 						<div id="result" class="table-responsive">  
-						</div> 
+						</div>
+						</div>
+						</div>
 					</div>
 				</div>				
 			</div>  
@@ -247,7 +263,7 @@ $(document).ready(function(){
 		var id = $(this).attr("id"); 
 		var empID = '<?php echo $empID; ?>';
 
-		if(confirm("Are you sure you want to remove this data?")){
+		if(confirm("Are you want to fire this employee?")){
                 
 			var action = "Delete";  
         

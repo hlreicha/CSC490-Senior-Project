@@ -40,7 +40,7 @@ function select($connect,$output) {
                 $query = "CALL selectUser()";  
                 $result = mysqli_query($connect, $query);  
                 $output .= '  
-                     <table class="table table-bordered">  
+                     <table class="table table-bordered" style="color: black">  
                           <tr>  
 						       
                                <th width="20%">ProductID</th>  
